@@ -24,7 +24,7 @@ const Track = () => {
         trackId: id
       },
       headers: {
-    'X-RapidAPI-Key': '7853b13684mshdc75038438fbc40p1a797cjsn66b784385c19',
+    'X-RapidAPI-Key': '2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7',
     'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com'
       }
     };

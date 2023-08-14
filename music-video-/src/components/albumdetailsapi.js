@@ -9,7 +9,7 @@ export default function Api(id) {
       albumId: id // '0P3oVJBFOv3TDXlYRhGL7s'
     },
     headers: {
-      "X-RapidAPI-Key": "c118baa328msha135d8b53c62575p1541f2jsne5557f16ccd7",
+      "X-RapidAPI-Key": "2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7",
       "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
     }
   };
