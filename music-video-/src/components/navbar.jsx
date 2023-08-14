@@ -1,10 +1,12 @@
-import { IconButton, Stack, AppBar, Toolbar, Button } from "@mui/material";
+import { IconButton, Stack, AppBar, Toolbar, Button,Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import Logo from "./icons/logo.png";
 import React from "react";
-import SearchBar from "./searchbar";
 import { MoonStars, User, CaretLeft, CaretRight } from "phosphor-react";
 import "./styles.css";
+import TextField from '@mui/material/TextField';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Navbar = () => (
   <Stack
@@ -44,7 +46,14 @@ const Navbar = () => (
       alignItems="center"
       sx={{ justifyContent: "space-between" }}
     >
-      <SearchBar />
+
+    <Box sx={{ '& > :not(style)': { m: 1 } }}>
+      <Box sx={{ display: 'flex', alignItems: 'flex-end',backgroundColor:"white",color:"white" }}>
+        <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+        <TextField id="input-with-sx" label="Search" variant="standard" style={{color:"white"}} />
+      </Box>
+    </Box>
+    
       <IconButton type="submit" sx={{ color: "white" }} className="moon">
         <MoonStars />
       </IconButton>
