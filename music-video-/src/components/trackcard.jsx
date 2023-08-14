@@ -6,29 +6,31 @@ import {
 } from "phosphor-react";
 import axios from "axios";
 import { useState } from "react";
+import Playsong from "./playsong";
 
-const Trackcard = (tracks) => {
-  const artist = tracks.artist;
-  const search = tracks.name;
-  const [audio,setAudio] = useState('');
+const Trackcard = ({ artist, name, time, setAudio }) => {
+  const artist1 = artist;
+  const search = name;
+  const [audio,setAudioState] = useState('');
   const play=async()=>{
      try{
-      const response= await axios.get('play-url',{
-        music: search
+      const response= await axios.get('http://localhost:5000/get-audio',{
+        params: {
+          music: search
+        }
       });
-      if(response.data.success){
+      console.log(search)
+      
         const file= response.data
-        setAudio(file.soundcloudTrack.audio[0].url)
-      }
+        setAudioState(file.data.soundcloudTrack.audio[0].url)
+      
 
      }catch(error){
       console.log(error)
 
      }
 
-    
   }
-  console.log(audio)
   return (
     <div
       style={{
@@ -46,14 +48,14 @@ const Trackcard = (tracks) => {
         onClick={play}
       />
       <div style={{ flex: "50%" }}>
-        <div>{tracks.name}</div>
+        <div>{name}</div>
         <div>
-          {artist.map((rem) => (
+          {artist1.map((rem) => (
             <span>{rem.name}</span>
           ))}
         </div>
       </div>
-      <div style={{ flexBasis: "10%" }}>{tracks.time}</div>
+      <div style={{ flexBasis: "10%" }}>{time}</div>
       <div style={{ flexBasis: "10%" }}>
         <ShareNetwork size={30} color="#D4D4D4" weight="light" />
       </div>
@@ -63,12 +65,7 @@ const Trackcard = (tracks) => {
       <div style={{ flexBasis: "10%" }}>
         <DotsThreeVertical size={30} color="#D4D4D4" weight="light" />
       </div>
-      {audio && ( // Display the audio player only if the audio URL is available
-        <audio controls autoPlay>
-          <source src= {audio} type="audio/mpeg"/>
-        Your browser does not support the audio element.
-      </audio>
-      )}
+      {audio && Playsong(audio)}
     </div>
   );
 };
