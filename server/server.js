@@ -18,7 +18,7 @@ app.get('/get-audio', async (req, res) => {
       track: search
     },
     headers: {
-      'X-RapidAPI-Key': '2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7',
+      'X-RapidAPI-Key': '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba',
       'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com'
     }
   };
@@ -40,6 +40,68 @@ app.get('/get-audio', async (req, res) => {
   }
 });
 
+app.get('/get-tracks',async(req,res)=>{
+  const id = req.query.ids;
+  const options = {
+    method: "GET",
+    url: "https://spotify-scraper.p.rapidapi.com/v1/album/tracks",
+    params: { 
+      albumId: id
+    },
+    headers: {
+      "X-RapidAPI-Key": '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba',
+      "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
+    }
+  };
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+    res.status(200).send({
+      message: 'Fetched successfully',
+      success: true,
+      data: response.data
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      message: 'An error occurred',
+      success: false,
+      error: error.message
+    });
+  }
+})
+
+app.get('/album-metadata',async(req,res)=>{
+  const id = req.query.ids;
+  const options = {
+    method: "GET", 
+    url: "https://spotify-scraper.p.rapidapi.com/v1/album/metadata",
+    params: {
+      albumId: id 
+    },
+    headers: {
+      "X-RapidAPI-Key": "8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba",
+      "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
+    } 
+  };
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+    res.status(200).send({
+      message: 'Fetched successfully',
+      success: true,
+      data: response.data
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      message: 'An error occurred',
+      success: false,
+      error: error.message
+    });
+  }
+})
+
 app.get('/search',async(req,res) =>{
   const search = req.query.search;
   console.log(search)
@@ -48,7 +110,7 @@ app.get('/search',async(req,res) =>{
     url: 'https://spotify-scraper.p.rapidapi.com/v1/search',
     params: {term: search},
     headers: {
-      'X-RapidAPI-Key': '2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7',
+      'X-RapidAPI-Key': '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba',
       'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com'
     }
   };
@@ -71,6 +133,7 @@ app.get('/search',async(req,res) =>{
   }
 
 })
+
 
 app.listen(port, () => {
   console.log(`Proxy server listening at http://localhost:${port}`);

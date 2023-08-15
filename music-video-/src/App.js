@@ -24,7 +24,7 @@ const App = () => (
           <Route path="/" exact element={<Searchfeed />} />
           <Route path="/discover" element={<Musicfeed />} />
           <Route path="/track/:id" element={<Track />} />
-          <Route path="/playtrack/:id" element={<PlayTrack />} />
+          <Route path="/playtrack" element={<PlayTrack />} />
           <Route path="/search" element={<SearchPage />} />
         </Routes>
       </Box>

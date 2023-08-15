@@ -12,26 +12,30 @@ const Trackapi = (props) => {
   // setTimeout(() => {
   //    console.log("world");
   // }, 8000);
-  const options = {
+ /* const options = {
     method: "GET",
     url: "https://spotify-scraper.p.rapidapi.com/v1/album/tracks",
     params: { 
       albumId: props.id
     },
     headers: {
-      "X-RapidAPI-Key": "2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7",
+      "X-RapidAPI-Key": '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba',
       "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
     }
-  };
+  };*/
   const fetchAPI = async () => {
     if (!isLoading) {
       try {
-        const response = await axios.request(options);
-        //  setcontainer(response.data);
-        console.log(response.data);
-        setcontainer(response.data);
+        const response = await axios.get('http://localhost:5000/get-tracks',{
+          params:{
+            id: props.id
+          }
+        })
+       const file= response.data;
+        console.log(file.data);
+        setcontainer(file.data);
         setIsLoading(true);
-        settrack(response.data.tracks.items);
+        settrack(file.data.tracks.items);
       } catch (error) {
         console.error(error);
       }

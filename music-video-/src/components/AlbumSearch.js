@@ -9,6 +9,7 @@ const AlbumSearch=({id,albumname,albumimage})=>{
         
             <img src={albumimage} alt="albumimage" style={{width:"200px"}}/>
             <h5>{albumname}</h5>
+            
 
         
         </Link>

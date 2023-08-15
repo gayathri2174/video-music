@@ -2,19 +2,64 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { details } from "./details";
 import Trackcard from "./trackcard";
-import Api from "./albumdetailsapi";
-import Trackapi from "./trackdetailsapi";
+import axios from "axios";
 
 const Track = () => {
-  //fetch using api
-  //separate track details
+  
   const { id } = useParams();
-  console.log("hello");
-  const albumdetails = Api(id);
-  const detail = albumdetails[0];
-  const url = albumdetails[1]; 
+  const [detail,setdetail] = useState([]);
+  const [url,seturl ]= useState(''); 
   const [container,setContainer] = useState([])
-  const metadata= async()=>{
+  const [isLoading, setIsLoading] = useState(false);
+  const [track, settrack] = useState([]);
+  
+  const Albummeta = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/album-metadata',{
+          params:{
+            ids: id
+          }
+        })
+       const file= response.data;
+        console.log(file.data);
+        setdetail(file.data);
+        seturl(file.data.cover[0].url)
+      } catch (error) {
+        console.error(error);
+      }
+    
+  };
+
+  const fetchAPI = async () => {
+    if (!isLoading) {
+      try {
+        console.log(id)
+        const response = await axios.get('http://localhost:5000/get-tracks',{
+          params:{
+            ids: id
+          }
+        })
+       const file= response.data;
+        console.log(file.data);
+        setIsLoading(true);
+        settrack(file.data.tracks.items);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+  useEffect(() => {
+    fetchAPI();
+  }, [isLoading]);
+  
+  setTimeout(() => {
+    fetchAPI();
+  }, 5000);
+
+  Albummeta();
+
+
+ /* const metadata= async()=>{
     const axios = require('axios');
 
     const options = {
@@ -24,7 +69,7 @@ const Track = () => {
         trackId: id
       },
       headers: {
-    'X-RapidAPI-Key': '2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7',
+    'X-RapidAPI-Key': '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba',
     'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com'
       }
     };
@@ -36,8 +81,7 @@ const Track = () => {
 	      console.error(error);
       }
     }
-  
-  //fetch image, artist name, album name
+  */
   return (
     <div className="text">
       <div
@@ -73,8 +117,21 @@ const Track = () => {
         </div>
       </div>
       <div>
-        <Trackapi id={id} />
-      </div>
+      {track ? (
+        <div>
+          {track?.map((temp) => (
+            <Trackcard
+            id={temp.id}
+              artist={temp.artists}
+              name={temp.name}
+              time={temp.durationText}
+            />
+          ))}
+        </div>
+      ) : (
+        <div>world</div>
+      )}
+    </div>
     </div>
   );
 };

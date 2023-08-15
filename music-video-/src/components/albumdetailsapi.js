@@ -6,12 +6,12 @@ export default function Api(id) {
     method: "GET", 
     url: "https://spotify-scraper.p.rapidapi.com/v1/album/metadata",
     params: {
-      albumId: id // '0P3oVJBFOv3TDXlYRhGL7s'
+      albumId: id 
     },
     headers: {
       "X-RapidAPI-Key": "2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7",
       "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
-    }
+    } 
   };
   const [container, setcontainer] = useState([]);
   const [url, seturl] = useState("");
