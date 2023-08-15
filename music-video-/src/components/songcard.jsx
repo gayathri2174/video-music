@@ -33,4 +33,4 @@ const Songcard = (album) => {
     </Link>
   );
 };
-export default Songcard;
+export default Songcard; 

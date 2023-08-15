@@ -7,22 +7,26 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import Playsong from "./playsong";
+import { useNavigate,useLocation } from "react-router-dom";
 
-const Trackcard = ({ artist, name, time, setAudio }) => {
+const Trackcard = ({ artist, name, time }) => {
   const artist1 = artist;
   const search = name;
   const [audio,setAudioState] = useState('');
+  const navigate=useNavigate()
+  const location=useLocation()
   const play=async()=>{
      try{
       const response= await axios.get('http://localhost:5000/get-audio',{
         params: {
           music: search
-        }
+        } 
       });
       console.log(search)
       
         const file= response.data
         setAudioState(file.data.soundcloudTrack.audio[0].url)
+
       
 
      }catch(error){
@@ -65,7 +69,7 @@ const Trackcard = ({ artist, name, time, setAudio }) => {
       <div style={{ flexBasis: "10%" }}>
         <DotsThreeVertical size={30} color="#D4D4D4" weight="light" />
       </div>
-      {audio && Playsong(audio)}
+      {audio & Playsong(audio)}
     </div>
   );
 };

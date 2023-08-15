@@ -12,7 +12,7 @@ const Feed = () => {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-    </Box>
+    </Box> 
   );
 };
 

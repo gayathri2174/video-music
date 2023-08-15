@@ -10,7 +10,7 @@ const Searchfeed = () => {
       <div
         style={{ 
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "row", 
           justifyContent: "space-between",
           marginTop: "20px",
           overflow: "auto",

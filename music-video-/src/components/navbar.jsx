@@ -9,7 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
 import SearchPage from "./search";
 
-
+ 
 const Navbar = () => {
   const [searchvalue,setsearchvalue]=useState('');
   const [searchres,setsearchres] = useState('');
