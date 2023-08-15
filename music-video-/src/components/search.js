@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {tracksdetail} from './searchresult'
 import AlbumSearch from "./AlbumSearch";
+import Grid from '@mui/material/Grid';
+import TrackDetail from "./TrackDetail";
 
 const SearchPage = () => {
     const navigate=useNavigate();
@@ -33,11 +35,14 @@ const SearchPage = () => {
             return(
                 <div>
                     <h4>Albums</h4>
-                    <div>
-                    {albumsarray.slice(0, 8).map((track) => (
+                    <Grid container spacing={2}>
+                       
+                        {albumsarray.slice(0, 8).map((track) => (
                         <AlbumSearch id={track.id} albumname={track.name} albumimage={track.cover[0].url}/>
                     ))}
-                    </div>
+                        
+                    
+                    </Grid>
 
                 </div>
             )
@@ -51,11 +56,11 @@ const SearchPage = () => {
                 return(
                     <div>
                         <h4>Tracks</h4>
-                        <div>
+                        <Grid container spacing={2}>
                         {trackarray.slice(0, 8).map((track) => (
-                            <AlbumSearch id={track.id} albumname={track.name} albumimage={track.album.cover[0].url}/>
+                            <TrackDetail id={track.id} albumname={track.name} albumimage={track.album.cover[0].url}/>
                         ))}
-                        </div>
+                        </Grid>
     
                     </div>
                 )
@@ -66,8 +71,9 @@ const SearchPage = () => {
 
    return(
     <div style={{color:"white"}}>
-        {detailalbum()}
+        
         {detailtrack()}
+        {detailalbum()}
     </div>
     
    )

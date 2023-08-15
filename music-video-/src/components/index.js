@@ -4,4 +4,6 @@ export { default as Searchfeed } from "./searchfeed";
 export { default as Musicfeed } from "./musicfeed";
 export { default as SideBar } from "./sidebar";
 export { default as SearchPage } from "./search";
+export { default as PlayTrack } from "./PlayTrack";
+
 
