@@ -34,7 +34,7 @@ const App=()=>{
           <Route path="/" exact element={<Searchfeed />} />
           <Route path="/discover" element={<Musicfeed />} />
           <Route path="/track/:id" element={<Track turl={turl}/>} />
-          <Route path="/playtrack" element={<PlayTrack />} />
+          <Route path="/playtrack" element={<PlayTrack turl={turl}/>} />
           <Route path="/search" element={<SearchPage />} />
         </Routes>
       </Box>

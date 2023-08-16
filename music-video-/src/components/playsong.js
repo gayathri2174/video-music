@@ -11,9 +11,8 @@ const Playsong=({audiourl})=>{
       audioRef.current.play();
     }
   }, [audiourl]);
-    return(
-        
-        <div style={{position:"fixed",bottom:"0",width:"100%"}}>
+    return(  
+      <div style={{position:"fixed",bottom:"0",width:"100%"}}>
         <audio controls ref={audioRef} style={{width:"100%"}}>
           <source src={audiourl} type="audio/mpeg"/>
         Your browser does not support the audio element.

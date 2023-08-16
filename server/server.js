@@ -4,7 +4,8 @@ const cors = require('cors'); // Import the cors package
 
 const app = express();
 const port = 5000;
-
+const key = 'df63232b4amshf793baa3a9a9701p1b5c8ejsnb3adabe750bf';
+const key1= '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba';
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000' })); // Allow requests from http://localhost:3000
 
@@ -18,7 +19,7 @@ app.get('/get-audio', async (req, res) => {
       track: search
     },
     headers: {
-      'X-RapidAPI-Key': '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba',
+      'X-RapidAPI-Key': key,
       'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com'
     }
   };
@@ -49,7 +50,7 @@ app.get('/get-tracks',async(req,res)=>{
       albumId: id
     },
     headers: {
-      "X-RapidAPI-Key": '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba',
+      "X-RapidAPI-Key": key,
       "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
     }
   };
@@ -80,7 +81,7 @@ app.get('/album-metadata',async(req,res)=>{
       albumId: id 
     },
     headers: {
-      "X-RapidAPI-Key": "8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba",
+      "X-RapidAPI-Key": key,
       "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
     } 
   };
@@ -102,6 +103,8 @@ app.get('/album-metadata',async(req,res)=>{
   }
 })
 
+
+
 app.get('/search',async(req,res) =>{
   const search = req.query.search;
   console.log(search)
@@ -110,7 +113,7 @@ app.get('/search',async(req,res) =>{
     url: 'https://spotify-scraper.p.rapidapi.com/v1/search',
     params: {term: search},
     headers: {
-      'X-RapidAPI-Key': '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba',
+      'X-RapidAPI-Key': key,
       'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com'
     }
   };
@@ -134,7 +137,72 @@ app.get('/search',async(req,res) =>{
 
 })
 
+app.get('/search-video',async(req,res)=>{
+  const search=req.query.search;
+  const options = {
+    method: 'GET',
+    url: 'https://youtube-media-downloader.p.rapidapi.com/v2/search/videos',
+    params: {
+      keyword: search
+    },
+    headers: {
+      'X-RapidAPI-Key': key1,
+      'X-RapidAPI-Host': 'youtube-media-downloader.p.rapidapi.com'
+    }
+  };
+  
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+    res.status(200).send({
+      message: 'Fetched successfully',
+      success: true,
+      data: response.data
+    });
 
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      message: 'An error occurred',
+      success: false,
+      error: error.message
+    });
+
+  }
+})
+app.get('/get-video',async(req,res)=>{
+  const id=req.query.id;
+  const options = {
+    method: 'GET',
+    url: 'https://youtube-media-downloader.p.rapidapi.com/v2/video/details',
+    params: {
+      videoId: id
+    },
+    headers: {
+      'X-RapidAPI-Key': key1,
+      'X-RapidAPI-Host': 'youtube-media-downloader.p.rapidapi.com'
+    }
+  };
+  
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+    res.status(200).send({
+      message: 'Fetched successfully',
+      success: true,
+      data: response.data
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      message: 'An error occurred',
+      success: false,
+      error: error.message
+    });
+  }
+
+})
 app.listen(port, () => {
   console.log(`Proxy server listening at http://localhost:${port}`);
 });
