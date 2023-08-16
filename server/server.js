@@ -6,6 +6,7 @@ const app = express();
 const port = 5000;
 const key = 'df63232b4amshf793baa3a9a9701p1b5c8ejsnb3adabe750bf';
 const key1= '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba';
+const key2='2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7';
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000' })); // Allow requests from http://localhost:3000
 
@@ -203,6 +204,50 @@ app.get('/get-video',async(req,res)=>{
   }
 
 })
+
+const trendid=(data)=>{
+  let videoid = [];
+  data.map((video)=>{
+    videoid.push(video.id)
+  })
+  return videoid;
+
+}
+
+app.get('/trend', async(req,res)=>{
+  const options = {
+    method: 'GET',
+    url: 'https://youtube-trending.p.rapidapi.com/trending',
+    params: {
+      country: 'US',
+      type: 'music'
+    },
+    headers: {
+      'X-RapidAPI-Key': key2,
+      'X-RapidAPI-Host': 'youtube-trending.p.rapidapi.com'
+    }
+   };
+    
+    try {
+	    const response = await axios.request(options);
+	    console.log(response.data);
+      const videoid = trendid(response.data);
+      res.status(200).send({
+        message: 'Fetched successfully',
+        success: true,
+        data: response.data
+      });
+
+    } catch (error) {
+	    console.error(error);
+      res.status(500).send({
+        message: 'An error occurred',
+        success: false,
+        error: error.message
+      });
+}
+})
+
 app.listen(port, () => {
   console.log(`Proxy server listening at http://localhost:${port}`);
 });

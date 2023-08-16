@@ -181,3 +181,28 @@ body {
 ::-webkit-scrollbar-corner {
   background-color: transparent;
 }
+
+/* Videofeed.css */
+
+.video-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+/* Add the blur effect for the rest of the text */
+.video-title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: -1;
+}

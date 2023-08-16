@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 import { details } from "./details";
 import Trackcard from "./trackcard";
 import axios from "axios";
@@ -112,6 +112,10 @@ const Track = ({turl}) => {
       }
     }
   */
+
+    const playtrack=()=>{
+      
+    }
   return (
     <div className="text">
       <div
@@ -165,7 +169,9 @@ const Track = ({turl}) => {
         <ShareNetwork size={30} color="#D4D4D4" weight="light" />
       </div>
       <div style={{ flexBasis: "10%" }}>
-        <UploadSimple size={30} color="#D4D4D4" weight="light" />
+        <Link to='/playtrack' state={{id:temp.id,trackname:temp.name,albumimage:url,albumname:detail.name}} >
+        <UploadSimple size={30} color="#D4D4D4" weight="light"/>
+        </Link>
       </div>
       <div style={{ flexBasis: "10%" }}>
         <DotsThreeVertical size={30} color="#D4D4D4" weight="light" />

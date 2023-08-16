@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import SideBar from "./sidebar";
-import Musicfeed from "./musicfeed";
 import Searchfeed from "./searchfeed";
 
 const Feed = () => {
