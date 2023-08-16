@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const TrackDetail=({id,albumname,trackname,albumimage})=>{
-    return(
+    return( 
         
         <Grid item md={3} sx={{width:200}}>
             <Link to={'/playtrack'} state={{id:id,trackname:trackname,albumimage:albumimage,albumname:albumname}} style={{ textDecoration: "none" }}>
