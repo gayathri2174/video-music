@@ -4,7 +4,7 @@ const cors = require('cors'); // Import the cors package
 
 const app = express();
 const port = 5000;
-const key = 'df63232b4amshf793baa3a9a9701p1b5c8ejsnb3adabe750bf';
+const key = 'd56393c5dbmsh1fe807a7b0e4b52p1d79ddjsn35512a54fce6';
 const key1= '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba';
 const key2='2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7';
 app.use(express.json());
@@ -136,6 +136,40 @@ app.get('/search',async(req,res) =>{
     });
   }
 
+})
+
+app.get('/get-lyric',async(req,res)=>{
+  const id=req.query.id;
+  const options = {
+    method: 'GET',
+    url: 'https://spotify-scraper.p.rapidapi.com/v1/track/lyrics',
+    params: {
+      trackId: id
+    },
+    headers: {
+      'X-RapidAPI-Key': key,
+      'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com'
+    }
+  };
+  
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+    res.status(200).send({
+      message: 'Fetched successfully',
+      success: true,
+      data: response.data
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      message: 'An error occurred',
+      success: false,
+      error: error.message
+    });
+
+  }
 })
 
 app.get('/search-video',async(req,res)=>{

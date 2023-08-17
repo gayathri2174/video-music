@@ -7,5 +7,7 @@ export { default as SearchPage } from "./search";
 export { default as PlayTrack } from "./PlayTrack";
 export { default as Playsong } from "./playsong";
 export {default as PlayVideo} from "./PlayVideo";
+export {default as Musictrend} from "./musictrend";
+
 
 

@@ -6,9 +6,16 @@ const Playsong=({audiourl})=>{
   const audioRef = useRef(null);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.src = audiourl;
-      audioRef.current.play();
+    const audioElement = audioRef.current;
+
+    if (audioElement) {
+      audioElement.src = audiourl;
+      audioElement.play();
+
+      return () => {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+      };
     }
   }, [audiourl]);
     return(  

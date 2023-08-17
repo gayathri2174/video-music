@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Navbar, Feed, Videofeed, Searchfeed, SideBar,SearchPage, PlayTrack,Playsong ,PlayVideo} from "./components";
+import { Navbar, Feed, Videofeed, Searchfeed, SideBar,SearchPage, PlayTrack,Playsong ,PlayVideo,Musictrend} from "./components";
 import Track from "./components/track.jsx";
 import { Box, Stack } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App=()=>{
   const [url,seturl] = useState('')
+  const [currentTime, setCurrentTime] = useState(0)
   const turl=(url)=>{
     seturl(url);
   }
-  console.log('APP')
   console.log(url)
-  
+   
   return(
   <BrowserRouter>
     <Navbar />
@@ -37,10 +37,11 @@ const App=()=>{
           <Route path="/playtrack" element={<PlayTrack turl={turl}/>} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/video" element={<PlayVideo />} />
+          <Route path="/trending" element={<Musictrend/>} />
         </Routes>
       </Box>
     </Stack>
-    <Playsong audiourl={url}/>
+    <Playsong audiourl={url} />
     
   </BrowserRouter>
   )

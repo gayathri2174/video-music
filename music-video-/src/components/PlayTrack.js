@@ -6,11 +6,31 @@ import axios from "axios";
 
 const PlayTrack=({turl})=>{
     const location = useLocation();
-  const { trackname, albumimage, albumname } = location.state;
+  const {id, trackname, albumimage, albumname } = location.state;
   const [audio, setAudioState] = useState('');
   const [videoId, setVideoId] = useState('');
   const [videourl, setVideoUrl] = useState('');
+  const [lyrics,setlyric] = useState('')
+  const [fetchlyric,setfetchlyric] = useState(true)
+  const lyric =async()=>{
+    if(fetchlyric){
+    try{
+        const response= await axios.get('http://localhost:5000/get-lyric',{
+            params:{
+                id:id
+            }
+        })
+        setlyric(response.data.data)
+        console.log(response.data.data)
+        setfetchlyric(false)
 
+    }catch(error){
+      console.log(error)
+
+    }
+    
+   }
+}
   const play = async () => {
     try {
       const response = await axios.get('http://localhost:5000/get-audio', {
@@ -68,6 +88,7 @@ const PlayTrack=({turl})=>{
 
   useEffect(() => {
     searchVideo();
+    lyric()
   }, []);
 
   useEffect(() => {
@@ -93,6 +114,16 @@ const PlayTrack=({turl})=>{
                 <Play size={30}color="#fafafa"weight="fill" style={{ flexBasis: "10%" ,backgroundColor:'red',padding:'8px',borderRadius:'25px',cursor:'pointer'}}
                 onClick={play}/>
                 
+            </Grid>
+            <Grid item>
+                {!fetchlyric && (
+                    <div>
+                    {lyrics.split('\n').map((line, index) => (
+                      <p key={index}>{line}</p>
+                    ))}
+                  </div>
+                )}
+
             </Grid>
             
         </Grid>

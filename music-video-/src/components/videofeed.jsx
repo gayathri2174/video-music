@@ -32,12 +32,14 @@ const Videofeed = () => {
        {fetch && (
         <Grid container spacing={2}>
          {containers.map((video)=>(
-          <Link to={'/video'} state={{id:video.videoId}}>
-          <Grid item key={video.videoId} xs={6} sm={3} md={4}>
+          
+          <Grid item key={video.videoId} md={4}>
+            <Link to={'/video'} state={{id:video.videoId}} style={{textDecoration:'none'}}>
           <img src={video.thumbnails[1].url} alt='videoimage' style={{width:'300px'}}/>
           <div className="video-title">{video.title}</div>
-          </Grid>
           </Link>
+          </Grid>
+          
         ))}
         </Grid>
        )}

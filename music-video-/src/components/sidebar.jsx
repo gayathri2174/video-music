@@ -72,7 +72,7 @@ const SideBar = ({ selectedCategory, setSelectedCategory }) => (
         </span>
       </button>
     </Link>
-    <Link to="/trend" style={{ textDecoration: "none" }}>
+    <Link to="/trending" style={{ textDecoration: "none" }}>
       <button
         className="category-btn"
         onClick={() => setSelectedCategory("Trend")}
