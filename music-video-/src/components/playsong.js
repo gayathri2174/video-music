@@ -1,32 +1,55 @@
-import React,{useEffect,useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { Play, Pause } from "phosphor-react";
+import { Grid } from "@mui/material";
 
-const Playsong=({audiourl})=>{
-  console.log(audiourl)
-  console.log('playing')
-  const audioRef = useRef(null);
+
+const Playsong = ({ audiourl }) => {
+  const audioRef = useRef(new Audio(audiourl));
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const onPlayPauseClick = () => {
+    setIsPlaying(!isPlaying);
+  };
 
   useEffect(() => {
     const audioElement = audioRef.current;
 
-    if (audioElement) {
-      audioElement.src = audiourl;
+    if (isPlaying) {
       audioElement.play();
-
-      return () => {
-        audioElement.pause();
-        audioElement.currentTime = 0;
-      };
+      
+    } else {
+      audioElement.pause();
     }
-  }, [audiourl]);
-    return(  
-      <div style={{position:"fixed",bottom:"0",width:"100%"}}>
-        <audio controls ref={audioRef} style={{width:"100%"}}>
-          <source src={audiourl} type="audio/mpeg"/>
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-    )
- 
-}
+  }, [isPlaying]);
 
-export default Playsong
+  return (
+    <div className="audio-player">
+      <div className="track-info">
+        <Grid container style={{ position: "fixed", bottom: "0" }} spacing={2}>
+          <Grid item>
+            {isPlaying ? (
+              <button
+                style={{ backgroundColor: "black" }}
+                onClick={onPlayPauseClick}
+              >
+                <Pause size={30} color="#f5f5f5" weight="fill" />
+              </button>
+            ) : (
+              <button
+                style={{ backgroundColor: "black" }}
+                onClick={onPlayPauseClick}
+              >
+                <Play size={30} color="#f5f5f5" weight="fill" />
+              </button>
+            )}
+          </Grid>
+          <Grid item>
+            <audio src={audiourl} type="audio/mpeg" controls ref={audioRef} />
+          </Grid>
+        </Grid>
+      </div>
+    </div>
+  );
+};
+
+export default Playsong;

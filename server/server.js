@@ -4,7 +4,7 @@ const cors = require('cors'); // Import the cors package
 
 const app = express();
 const port = 5000;
-const key = 'fe37d733c9msh08083dfd584ab98p125efdjsn4c614155f3a2';
+const key = 'bafa5af131mshf8c9b7b68f4bf19p1f8eebjsn992b77484e26';
 const key1= '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba';
 const key2='2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7';
 app.use(express.json());

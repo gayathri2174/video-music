@@ -66,7 +66,9 @@ const Playlist=({turl})=>{
             <div>
                 {container.map((track,id)=>(
                     <Grid container key={id}>
+                        <Link to={`/track/${track.album.id}`} style={{ textDecoration: "none" }}>
                         <img src={track.album.cover[1].url} alt='albumimg' />
+                        </Link>
                         <Grid item>{track.name}</Grid>
                         <Grid item>{track.album.name}</Grid>
                         <Grid item>
