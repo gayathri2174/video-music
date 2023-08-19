@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Navbar, Feed, Videofeed, Searchfeed, SideBar,SearchPage, PlayTrack,Playsong ,PlayVideo,Musictrend} from "./components";
+import { Navbar, Feed, Videofeed, Searchfeed, SideBar,SearchPage, PlayTrack,Playsong ,PlayVideo,Genre,Playlist} from "./components";
 import Track from "./components/track.jsx";
 import { Box, Stack } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -37,7 +37,8 @@ const App=()=>{
           <Route path="/playtrack" element={<PlayTrack turl={turl}/>} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/video" element={<PlayVideo />} />
-          <Route path="/trending" element={<Musictrend/>} />
+          <Route path="/trending" element={<Genre/>} />
+          <Route path="/playlist" element={<Playlist turl={turl}/>} />
         </Routes>
       </Box>
     </Stack>

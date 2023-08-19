@@ -4,7 +4,7 @@ const cors = require('cors'); // Import the cors package
 
 const app = express();
 const port = 5000;
-const key = 'd56393c5dbmsh1fe807a7b0e4b52p1d79ddjsn35512a54fce6';
+const key = 'fe37d733c9msh08083dfd584ab98p125efdjsn4c614155f3a2';
 const key1= '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba';
 const key2='2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7';
 app.use(express.json());
@@ -104,7 +104,37 @@ app.get('/album-metadata',async(req,res)=>{
   }
 })
 
-
+app.get('/playlist-track',async(req,res)=>{
+  const id = req.query.ids;
+  const options = {
+    method: 'GET',
+    url: 'https://spotify-scraper.p.rapidapi.com/v1/playlist/contents',
+    params: {
+      playlistId: id
+    },
+    headers: {
+      'X-RapidAPI-Key': key,
+      'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com'
+    }
+  };
+  
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+    res.status(200).send({
+      message: 'Fetched successfully',
+      success: true,
+      data: response.data
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      message: 'An error occurred',
+      success: false,
+      error: error.message
+    });
+  }
+})
 
 app.get('/search',async(req,res) =>{
   const search = req.query.search;
@@ -171,6 +201,45 @@ app.get('/get-lyric',async(req,res)=>{
 
   }
 })
+
+app.get('/get-genre-data', async (req, res) => {
+  const genreIds = ['0JQ5DAqbMKFGvOw3O4nLAf', '0JQ5DAqbMKFEC4WFtoNRpw', '0JQ5DAqbMKFHCxg5H5PtqW'];
+  const genreData = [];
+
+  try {
+    for (const genreId of genreIds) {
+      const options = {
+        method: 'GET',
+        url: 'https://spotify-scraper.p.rapidapi.com/v1/genre/contents',
+        params: {
+          genreId: genreId
+        },
+        headers: {
+          'X-RapidAPI-Key': key,
+          'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com'
+        }
+      };
+
+      const response = await axios.request(options);
+      genreData.push(response.data);
+    }
+
+    res.status(200).send({
+      message: 'Fetched successfully',
+      success: true,
+      data: genreData
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      message: 'An error occurred',
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+
 
 app.get('/search-video',async(req,res)=>{
   const search=req.query.search;
