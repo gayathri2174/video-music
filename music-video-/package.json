@@ -21,7 +21,8 @@
         "react-router-dom": "6.8.1",
         "react-scripts": "^5.0.1",
         "timerpromise": "1.0.0",
-        "timers": "0.1.1"
+        "timers": "0.1.1",
+        "use-sound": "^4.0.1"
     },
     "devDependencies": {
         "@babel/runtime": "7.13.8"
