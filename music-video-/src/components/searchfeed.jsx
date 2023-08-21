@@ -2,22 +2,23 @@ import React from "react";
 import Songcard from "./songcard";
 import Artistcard from "./artistcard";
 import { albums, playlist, artist } from "./constants.js";
+import { Grid } from "@mui/material";
 
 const Searchfeed = () => {
   return (
     <div className="home-text">
       <span>Recently Played</span>
-      <div
-        style={{ 
+      <Grid style={{ 
           display: "flex",
           flexDirection: "row", 
           justifyContent: "space-between",
           marginTop: "20px",
           overflow: "auto",
           marginRight: "0"
-        }}
-      >
+        }}>
+          
         {albums.map((temp) => (
+          <Grid item>
           <Songcard
             key={temp.id}
             album={temp.name}
@@ -25,8 +26,10 @@ const Searchfeed = () => {
             link={temp.image}
             name={temp.artist}
           />
+          </Grid>
         ))}
-      </div>
+       
+      </Grid>
       <div>
         <span>Playlist for you</span>
         <div

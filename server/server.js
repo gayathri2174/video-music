@@ -4,9 +4,9 @@ const cors = require('cors'); // Import the cors package
 
 const app = express();
 const port = 5000;
-const key = 'bafa5af131mshf8c9b7b68f4bf19p1f8eebjsn992b77484e26';
+const key = '45b789b412msh60a24d6f51d9220p17c671jsn08defa2d2411';
 const key1= '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba';
-const key2='2e87ac32cfmshbbe7b492ebe9c20p12daf1jsnd4ad019388c7';
+const key2='bafa5af131mshf8c9b7b68f4bf19p1f8eebjsn992b77484e26';
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000' })); // Allow requests from http://localhost:3000
 
@@ -318,11 +318,13 @@ const trendid=(data)=>{
 }
 
 app.get('/trend', async(req,res)=>{
+  const countrys = req.query.country
+  console.log(countrys)
   const options = {
     method: 'GET',
     url: 'https://youtube-trending.p.rapidapi.com/trending',
     params: {
-      country: 'US',
+      country: countrys,
       type: 'music'
     },
     headers: {

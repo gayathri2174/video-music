@@ -1,58 +1,72 @@
 import React, { useEffect, useState } from "react";
-import { useParams,Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { details } from "./details";
 import Trackcard from "./trackcard";
 import axios from "axios";
 import {
   Play,
+  Pause,
   ShareNetwork,
   UploadSimple,
-  DotsThreeVertical
+  DotsThreeVertical,
 } from "phosphor-react";
+import { Grid } from "@mui/material";
 
-const Track = ({turl}) => {
-  
+const Track = ({ turl,playing }) => {
   const { id } = useParams();
-  const [detail,setdetail] = useState([]);
-  const [url,seturl ]= useState(''); 
-  const [container,setContainer] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
+  const [detail, setdetail] = useState([]);
+  const [url, seturl] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [track, settrack] = useState([]);
-  const [fetch,setfetch] = useState(false)
+  const [fetch, setfetch] = useState(true);
+  const [currentlyPlayingIndex, setCurrentlyPlayingIndex] = useState(-1); // Track index that is currently playing
+  const [isplaying, setisplaying] = useState(false);
+  const [audio, setAudioState] = useState("");
 
-  const [audio,setAudioState] = useState('');
-  
-  const play=async(search)=>{
-     try{
-      const response= await axios.get('http://localhost:5000/get-audio',{
+  const play = async (search, index) => {
+    try {
+      const response = await axios.get("http://localhost:5000/get-audio", {
         params: {
-          music: search
-        } 
+          music: search,
+        },
       });
-      console.log(search)
+  
+      const file = response.data;
+      setAudioState(file.data.soundcloudTrack.audio[0].url);
+  
+      if (currentlyPlayingIndex === index) {
+        setCurrentlyPlayingIndex(-1); 
+        setisplaying(false)// Pause the currently playing track
+        
+      } else {
+        setCurrentlyPlayingIndex(index); // Play the clicked track
+        setisplaying(true)
+        
+        
+      }
+      turl(audio);
+      playing(isplaying);
+      console.log(isplaying)
+  
       
-        const file= response.data
-        setAudioState(file.data.soundcloudTrack.audio[0].url)
-        turl(audio)
-
-     }catch(error){
-      console.log(error)
-
-     }
+    } catch (error) {
+      console.log(error);
     }
+  };
+  
+
   const Albummeta = async () => {
-    if(fetch){
+    if (fetch) {
       try {
-        const response = await axios.get('http://localhost:5000/album-metadata',{
-          params:{
-            ids: id 
-          }
-        })
-       const file= response.data;
-        console.log(file.data);
+        const response = await axios.get("http://localhost:5000/album-metadata", {
+          params: {
+            ids: id,
+          },
+        });
+        const file = response.data;
         setdetail(file.data);
-        seturl(file.data.cover[0].url)
-        setfetch(false)
+        seturl(file.data.cover[0].url);
+        setfetch(false);
       } catch (error) {
         console.error(error);
       }
@@ -60,103 +74,90 @@ const Track = ({turl}) => {
   };
 
   const fetchAPI = async () => {
-    if (!isLoading) {
+    if (isLoading) {
       try {
-        console.log(id)
-        const response = await axios.get('http://localhost:5000/get-tracks',{
-          params:{
-            ids: id
-          }
-        })
-       const file= response.data;
-        console.log(file.data);
-        setIsLoading(true);
+        const response = await axios.get("http://localhost:5000/get-tracks", {
+          params: {
+            ids: id,
+          },
+        });
+        const file = response.data;
+        setIsLoading(false);
         settrack(file.data.tracks.items);
-        setfetch(true)
       } catch (error) {
         console.error(error);
       }
     }
   };
+
   useEffect(() => {
     fetchAPI();
-  }, [isLoading]);
+    Albummeta();
+  }, [fetch]);
+
   
-  setTimeout(() => {
-    fetchAPI();
-  }, 5000);
 
-  Albummeta();
-
-
- /* const metadata= async()=>{
-    const axios = require('axios');
-
-    const options = {
-      method: 'GET',
-      url: 'https://spotify-scraper.p.rapidapi.com/v1/track/metadata',
-      params: {
-        trackId: id
-      },
-      headers: {
-    'X-RapidAPI-Key': '8f26eecff1msh5fb17874cc3ec1cp1259f3jsne1a4bd11f2ba',
-    'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com'
-      }
-    };
-    try {
-	    const response = await axios.request(options);
-	    console.log(response.data);
-      setContainer(response.data)
-     } catch (error) {
-	      console.error(error);
-      }
-    }
-  */
-
-    const playtrack=()=>{
-      
-    }
   return (
     <div className="text">
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-end",
-          marginLeft: "20px"
-        }}
-      >
+      <Grid container alignItems="flex-end" spacing={2}>
+        <Grid  item>
         <img
           src={url}
           alt="albumimage"
           style={{ width: "252px", height: "255px" }}
         />
+        </Grid>
 
-        <div>
-          <div style={{ fontWeight: "400", fontSize: "15px" }}>Album</div>
-          <div>{detail.name}</div>
+        <Grid item>
+          
+          <div className='font-light' style={{ fontSize: "15px" }}>Album</div>
+          <div className="font-medium" style={{fontSize:'25px',marginTop:'5px'}}>{detail.name}</div>
           <div
-            style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
+            style={{ display: "flex", flexDirection: "row", flexWrap: "wrap",marginTop:'5px' }}
           >
-            <div>
+            <div className="font-light" style={{marginRight:'6px'}}>
               {detail.artists?.map((artist, id) => {
                 return <div key={id}>{artist.name}</div>;
               })}
             </div>
-            <div className="dot"></div>
-            <div>2015</div>
-            <div className="dot"></div>
-            <div>{detail.trackCount} songs</div>
+            <div className="dot" style={{marginRight:'6px'}}></div>
+            <div className="font-light" style={{marginRight:'6px'}}>2015</div>
+            <div className="dot" style={{marginRight:'6px'}}></div>
+            <div className="font-light" style={{marginRight:'6px'}}>{detail.trackCount} songs</div>
           </div>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
       <div>
-      {track ? (
-        <div>
-          {track?.map((temp) => (
-            <div style={{ display: "flex",flexDirection: "row",margin: "25px 10px",alignItems: "center"}}>
-              <Play size={30} color="#fafafa" weight="fill" style={{ flexBasis: "10%" }} onClick={() => play(temp.name)}/>
-      <div style={{ flex: "50%" }}>
+        {track ? (
+          <div>
+            {track?.map((temp, index) => (
+              <div
+                key={index}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  margin: "25px 10px",
+                  alignItems: "center",
+                }}
+              >
+                {currentlyPlayingIndex === index && isplaying ? (
+      <Pause
+        size={30}
+        color="#fafafa"
+        weight="fill"
+        style={{ flexBasis: "10%" }}
+        onClick={() => play(temp.name, index)}
+      />
+    ) : (
+      <Play
+        size={30}
+        color="#fafafa"
+        weight="fill"
+        style={{ flexBasis: "10%" }}
+        onClick={() => play(temp.name, index)}
+      />
+    )}
+                <div style={{ flex: "50%" }}>
         <div>{temp.name}</div>
         <div>
           {temp.artists.map((rem) => (
@@ -165,9 +166,7 @@ const Track = ({turl}) => {
         </div>
       </div>
       <div style={{ flexBasis: "10%" }}>{temp.durationText}</div>
-      <div style={{ flexBasis: "10%" }}>
-        <ShareNetwork size={30} color="#D4D4D4" weight="light" />
-      </div>
+      
       <div style={{ flexBasis: "10%" }}>
         <Link to='/playtrack' state={{id:temp.id,trackname:temp.name,albumimage:url,albumname:detail.name}} >
         <UploadSimple size={30} color="#D4D4D4" weight="light"/>
@@ -176,15 +175,15 @@ const Track = ({turl}) => {
       <div style={{ flexBasis: "10%" }}>
         <DotsThreeVertical size={30} color="#D4D4D4" weight="light" />
       </div>
-            </div>
-            
-          ))}
-        </div>
-      ) : (
-        <div>world</div>
-      )}
-    </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div>Loading</div>
+        )}
+      </div>
     </div>
   );
 };
-export default Track
+
+export default Track;

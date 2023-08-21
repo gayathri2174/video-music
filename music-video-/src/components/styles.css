@@ -1,3 +1,9 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto:wght@100;300;400;500&display=swap');
+
+*{
+  font-family: 'Roboto', sans-serif;
+}
 body {
   margin: 0;
   background-color: black;
@@ -208,9 +214,8 @@ body {
 }
 
 
-button {
-  background: none;
-  border: none;
+.button-player {
+  
   cursor: pointer;
 }
 
@@ -221,3 +226,47 @@ button svg {
 }
 
 
+.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
+  color: white;
+}
+
+.select>svg{
+  color: white;
+  
+}
+
+.select{
+  background-color: black;
+}
+.container {
+ 
+  position: relative;
+}
+
+.box {
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.overlay {
+  z-index: 9;
+  margin: 30px;
+  margin: 200px;
+  margin-top:210px;
+}
+
+.font-regular{
+  font-weight: 400;
+}
+
+.font-medium{
+  font-weight: 500;
+}
+.font-light{
+  font-weight: 300;
+}
+.font-thin{
+  font-weight: 200;
+}
