@@ -37,44 +37,6 @@ const SideBar = ({ selectedCategory, setSelectedCategory }) => (
     <Link to="/discover" style={{ textDecoration: "none" }}>
       <button
         className="category-btn"
-        onClick={() => setSelectedCategory("Discover")}
-      >
-        <span
-          className="sidebar-icon"
-          style={{ color: "Discover" === selectedCategory && "white" }}
-        >
-          <Sparkle size={26} />
-        </span>
-        <span
-          className="sidebar-name"
-          style={{ color: "Discover" === selectedCategory && "white" }}
-        >
-          Discover
-        </span>
-      </button>
-    </Link>
-    <Link to="/shuffle" style={{ textDecoration: "none" }}>
-      <button
-        className="category-btn"
-        onClick={() => setSelectedCategory("Shuffle")}
-      >
-        <span
-          className="sidebar-icon"
-          style={{ color: "Shuffle" === selectedCategory && "white" }}
-        >
-          <Shuffle size={26} />
-        </span>
-        <span
-          className="sidebar-name"
-          style={{ color: "Shuffle" === selectedCategory && "white" }}
-        >
-          Shuffle
-        </span>
-      </button>
-    </Link>
-    <Link to="/trending" style={{ textDecoration: "none" }}>
-      <button
-        className="category-btn"
         onClick={() => setSelectedCategory("Trend")}
       >
         <span
@@ -88,6 +50,26 @@ const SideBar = ({ selectedCategory, setSelectedCategory }) => (
           style={{ color: "Trend" === selectedCategory && "white" }}
         >
           Trend
+        </span>
+      </button>
+    </Link>
+    
+    <Link to="/trending" style={{ textDecoration: "none" }}>
+      <button
+        className="category-btn"
+        onClick={() => setSelectedCategory("Genre")}
+      >
+        <span
+          className="sidebar-icon"
+          style={{ color: "Genre" === selectedCategory && "white" }}
+        >
+          <Sparkle size={26} />
+        </span>
+        <span
+          className="sidebar-name"
+          style={{ color: "Genre" === selectedCategory && "white" }}
+        >
+          Genre
         </span>
       </button>
     </Link>

@@ -2,9 +2,9 @@ import { House, Sparkle, Shuffle, ChartBar, Books } from "phosphor-react";
 
 export const categories = [
   { name: "New", icon: <House size={26} /> },
-  { name: "Discover", icon: <Sparkle size={26} /> },
+  { name: "Trend", icon: <ChartBar size={26} /> },
   { name: "Shuffle", icon: <Shuffle size={26} /> },
-  { name: "Trend", icon: <ChartBar size={26} /> }
+  { name: "Genre", icon: <Sparkle size={26} /> }
 ];
 
 export const library = [{ name: "Library", icon: <Books size={26} /> }];
