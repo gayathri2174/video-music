@@ -2,12 +2,12 @@ import { IconButton, Stack, AppBar, Toolbar, Button,Box } from "@mui/material";
 import { Link,useNavigate } from "react-router-dom";
 import Logo from "./icons/logo.png";
 import React, { useState } from "react";
-import { MoonStars, User, CaretLeft, CaretRight } from "phosphor-react";
+import { MoonStars, User, CaretLeft, CaretRight,MagnifyingGlass } from "phosphor-react";
 import "./styles.css";
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
-import axios from "axios";
-import SearchPage from "./search";
+
+
 
  
 const Navbar = () => {
@@ -64,9 +64,9 @@ const Navbar = () => {
     >
 
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
-      <Box sx={{ display: 'flex', alignItems: 'flex-end',backgroundColor:"white",color:"white" }}>
-        <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} onClick={redirect}/>
-        <TextField id="input-with-sx" label="Search" variant="standard" style={{color:"white"}} 
+      <Box sx={{ display: 'flex', alignItems: 'flex-end',backgroundColor:"#3d3d3d",color:"white" ,borderRadius:'10px',height:'51px',paddingLeft:'10px'}}>
+        <MagnifyingGlass size={30} color="#f5f5f5" onClick={redirect} style={{marginBottom:'10px'}}/>
+        <TextField id="filled-basic" label="Search" variant="filled" className="search-box"
         value={searchvalue} 
         onChange={(event) => setsearchvalue(event.target.value)}
         onKeyDown={(event) => {

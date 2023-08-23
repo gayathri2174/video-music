@@ -240,7 +240,7 @@ button svg {
 }
 .container {
  
-  position: relative;
+  position: relative; 
 }
 
 .box {
@@ -269,4 +269,50 @@ button svg {
 }
 .font-thin{
   font-weight: 200;
+}
+.MuiPaper-root .MuiPaper-elevation .MuiPaper-rounded .MuiPaper-elevation1 .MuiPaper-root .MuiMenu-paper .MuiPaper-elevation .MuiPaper-rounded .MuiPaper-elevation8 .MuiPopover-paper .css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
+  background-color: #372d2d;
+}
+#demo-simple-select{
+  background-color: black;
+  width: 100px;
+  color: #c6c2c2;
+}
+
+.lyric-box{
+  background-color: #3d3d3d;
+  padding: 20px;
+  border-radius: 25px;
+  padding-left: 35px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 320px;
+  padding-top: 30px;
+}
+
+.lyric{
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 400;
+
+}
+.search-box::after{
+  border-bottom:2px solid white ;
+
+}
+.css-1ff8729-MuiInputBase-root-MuiFilledInput-root:after{
+  border-bottom: 2px solid white !important;
+}
+
+.css-e4w4as-MuiFormLabel-root-MuiInputLabel-root{
+  color:#bbb !important;
+}
+.css-o943dk-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+  color:#bbb !important;
+}
+.css-10botns-MuiInputBase-input-MuiFilledInput-input{
+  color: #e7e4e4 !important;
 }

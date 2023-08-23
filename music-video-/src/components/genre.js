@@ -36,8 +36,12 @@ const Genre = () => {
               {genre.contents.items.slice(0,5).map((genrealbum) => (
                 <div key={genrealbum.id}>
                   <p>{genrealbum.name}</p>
-                  <Grid container spacing={2}>
-                    {genrealbum.contents.items.slice(0,4).map((playlist) => (
+                  <Grid  style={{overflow:'hidden',display: "flex",
+          flexDirection: "row", 
+          justifyContent: "space-between",
+          overflow: "auto",
+         }}>
+                    {genrealbum.contents.items.map((playlist) => (
                       <Playlistcard key={playlist.id} playlists={playlist}/>
                     ))}
                   </Grid>

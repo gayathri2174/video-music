@@ -43,11 +43,11 @@ const Videofeed = () => {
       <Grid container justifyContent={'space-between'}>
         <Grid item><h3>Trending</h3></Grid>
         <Grid item style={{backgroundColor:'black'}}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label" style={{color:'white'}}>Country</InputLabel>
+        <FormControl fullWidth style={{backgroundColor:'black',width:'100px'}}>
+          <InputLabel id="demo-simple-select-label" style={{color:'white',backgroundColor:'black',width:'100px'}}>Country</InputLabel>
           <Select labelId="demo-simple-select-label" id="demo-simple-select" value={countrys} label="Country"
-               onChange={handleChange} style={{color:'white'}} className="select">
-              <MenuItem value={'US'} style={{backgroundColor:'black',color:'white'}}>US</MenuItem>
+               onChange={handleChange} style={{color:'white',backgroundColor:'black'}} className="select">
+              <MenuItem value={'US'} style={{backgroundColor:'black',color:'white',width:'100px'}} className="menuc">US</MenuItem>
               <MenuItem value={'IN'} style={{backgroundColor:'black',color:'white'}}>India</MenuItem>
           </Select>
         </FormControl>
@@ -61,7 +61,7 @@ const Videofeed = () => {
          {containers.map((video)=>(
           
           <Grid item key={video.videoId} md={4}>
-            <Link to={'/video'} state={{id:video.videoId}} style={{textDecoration:'none'}}>
+            <Link to={'/video'} state={{id:video.videoId}} style={{textDecoration:'none',color:'#c6c2c2'}}>
           <img src={video.thumbnails[1].url} alt='videoimage' style={{width:'300px'}}/>
           <div className="video-title">{video.title}</div>
           </Link>
