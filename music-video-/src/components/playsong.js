@@ -116,6 +116,8 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
       </Grid>
       <Grid item>
         <div className="font-regular">{title}</div>
+      </Grid>
+      <Grid item>
         <div className="font-light">{album}</div>
       </Grid>
       <Grid item>
