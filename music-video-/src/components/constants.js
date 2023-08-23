@@ -31,35 +31,46 @@ export const artist = [
     name: "Zayn Malik"
   }
 ];
+
+
 export const playlist = [
   {
+    id:1,
+    playlist_id:'37i9dQZF1DXcBWIGoYBM5M',
     cover:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKoBofQTReCYjMObAuvZjrxC6nL_1x08CN-1A-ab0DVT3QaRKK2PO0waYGyhtdgrcbJbI&usqp=CAU",
-    name: "Acoustic Pop",
+    'https://i.scdn.co/image/ab67706f0000000220c0ad3f3597e79da2c62e5f',
+    name: "Today's Top Hits",
     artist: "YFN Lucci, Young Bleu, Pop Smoke, Toosii"
   },
   {
-    cover:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx39pAugCZf1yW-hj6wpq86QAQO2QCZUIPaA&usqp=CAU",
-    name: "‘90s Slow Dance",
+    id:2,
+    playlist_id:'37i9dQZF1DX5Ejj0EkURtP' ,
+    cover: 'https://i.scdn.co/image/ab67706f00000002b0fe40a6e1692822f5a9d8f1',
+    name: "All Out 2010s",
     artist: "Mariah Carey, Shania Twain, Toni Braxton..."
   },
   {
+    id:3,
+    playlist_id:'37i9dQZF1DXdpQPPZq3F7n' ,
     cover:
-      "https://d2rd7etdn93tqb.cloudfront.net/wp-content/uploads/2022/03/spotify-playlist-cover-orange-headphones-032322.jpg",
-    name: "Unwind",
+    'https://i.scdn.co/image/ab67706f000000027981e2102a01fee012123e00',
+    name: "Bollywood Mush",
     artist: "YFN Lucci, Young Bleu, Pop Smoke, Toosii"
   },
   {
+    id:4,
+    playlist_id:'37i9dQZF1DWXtlo6ENS92N' ,
     cover:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEPTGXvJYxtWXIsVBNhMGFvTbaHpW6dYLkAQ&usqp=CAU",
-    name: "Slow Jams",
+    'https://i.scdn.co/image/ab67706f000000023719f1afb75553bb9142376f',
+    name: "Bollywood Butter",
     artist: "YFN Lucci, Young Bleu, Pop Smoke, Toosii"
   },
   {
+    id:5,
+    playlist_id:'37i9dQZF1DWXtlo6ENS92N' ,
     cover:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKoBofQTReCYjMObAuvZjrxC6nL_1x08CN-1A-ab0DVT3QaRKK2PO0waYGyhtdgrcbJbI&usqp=CAU",
-    name: "Acoustic Pop",
+    'https://i.scdn.co/image/ab67706f000000023719f1afb75553bb9142376f',
+    name: "Bollywood Butter",
     artist: "YFN Lucci, Young Bleu, Pop Smoke, Toosii"
   }
 ];

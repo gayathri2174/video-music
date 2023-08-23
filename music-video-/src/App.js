@@ -7,15 +7,36 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App=()=>{
   const [url,seturl] = useState('')
+  const [image,setimage] = useState('')
+  const [title,settitle] = useState('')
+  const [album,setalbum] = useState('')
+ 
   const [isPlaying,setIsPlaying] = useState(false)
   const playing=(isPlaying)=>{
-    setIsPlaying(isPlaying)
+    setIsPlaying(isPlaying) 
     console.log(isPlaying)
   }
   const turl=(url)=>{
     
     seturl(url);
     console.log(url)
+  }
+  const imageurl=(image)=>{
+    
+    setimage(image);
+    console.log(image)
+  }
+  const titlefun=(title)=>{
+    
+    settitle(title);
+    console.log(title)
+   
+  }
+  const albumfun=(album)=>{
+    
+    setalbum(album);
+    console.log(album)
+   
   }
   
   useEffect(()=>{
@@ -42,7 +63,7 @@ const App=()=>{
         <Routes>
           <Route path="/" exact element={<Searchfeed />} />
           <Route path="/discover" element={<Videofeed />} />
-          <Route path="/track/:id" element={<Track turl={turl} playing={playing}/>} />
+          <Route path="/track/:id" element={<Track turl={turl} playing={playing} imageurl={imageurl} albumfun={albumfun} titlefun={titlefun}/>} />
           <Route path="/playtrack" element={<PlayTrack turl={turl} playing={playing}/>} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/video" element={<PlayVideo />} />
@@ -51,7 +72,7 @@ const App=()=>{
         </Routes>
       </Box>
     </Stack>
-    <Playsong audiourl={url} isplaying={isPlaying}/>
+    <Playsong audiourl={url} isplaying={isPlaying} imgurl={image} albumname={album} titlename={title}/>
     
   </BrowserRouter>
   )

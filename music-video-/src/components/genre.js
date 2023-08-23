@@ -40,7 +40,7 @@ const Genre = () => {
           flexDirection: "row", 
           justifyContent: "space-between",
           overflow: "auto",
-         }}>
+         }}> 
                     {genrealbum.contents.items.map((playlist) => (
                       <Playlistcard key={playlist.id} playlists={playlist}/>
                     ))}

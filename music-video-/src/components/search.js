@@ -6,6 +6,7 @@ import {tracksdetail} from './searchresult'
 import AlbumSearch from "./AlbumSearch";
 import Grid from '@mui/material/Grid';
 import TrackDetail from "./TrackDetail";
+import PlaylistSearch from "./PlaylistSearch";
 
 const SearchPage = () => {
     const navigate=useNavigate();
@@ -35,11 +36,12 @@ const SearchPage = () => {
       },[])
       const detailalbum=()=>{
         const len = searchres.albums.items.length;
+        console.log('album',len)
         if(len>0 && len>5){
             const albumsarray= searchres.albums.items;
             return(
-                <div>
-                    <h4>Albums</h4>
+                <div style={{marginBottom:'25px'}}>
+                    <div className="font-regular" style={{fontSize:'25px',margin:'20px',marginLeft:'5px'}}>Albums</div>
                     <Grid container spacing={2}>
                        
                         {albumsarray.slice(0, 8).map((track) => (
@@ -56,11 +58,12 @@ const SearchPage = () => {
         }
         const detailtrack=()=>{
             const len = searchres.tracks.items.length;
+            console.log('track',len)
             if(len>0 && len>5){
                 const trackarray= searchres.tracks.items;
                 return(
-                    <div>
-                        <h4>Tracks</h4>
+                    <div style={{marginBottom:'25px'}}>
+                        <div className="font-regular" style={{fontSize:'25px',margin:'20px',marginLeft:'5px'}}>Tracks</div>
                         <Grid container spacing={2}>
                         {trackarray.slice(0, 8).map((track) => (
                             <TrackDetail id={track.id} albumname={track.album.name} trackname={track.name} albumimage={track.album.cover[0].url}/>
@@ -73,39 +76,46 @@ const SearchPage = () => {
     
           }
         
-          const detailgenre=()=>{
+      /*    const detailgenre=()=>{
             const len = searchres.genres.items.length;
-            console.log(len)
+            console.log('genre',len)
             if(len>0 && len>5){
                 const playlistarray= searchres.genres.items;
+                console.log(playlistarray)
                 return(
-                    <div>
-                        <h4>Playlist</h4>
+                    <div style={{marginBottom:'25px'}}>
+                        <div className="font-regular" style={{fontSize:'25px',margin:'20px',marginLeft:'5px'}}>Genre</div>
                         <Grid container spacing={2}>
                        
                         {playlistarray.slice(0, 8).map((track) => (
-                        <AlbumSearch id={track.id} albumname={track.name} albumimage={track.images[0][0].url}/>
-                        
-                        ))}
+                        <PlaylistSearch id={track.id} albumname={track.name} albumimage={track.image?.[0]?.url}/>
+                         ))}
+
                     </Grid>
     
-                    </div>
+                    </div> 
+                )
+            }
+            else{
+                return(
+                    <div>no</div>
                 )
             }
            
-        }
+        }*/
 
         const detailplaylist=()=>{
             const len = searchres.playlists.items.length;
+            console.log('playlist',len)
             if(len>0 && len>5){
                 const playlistarray= searchres.playlists.items;
                 return(
-                    <div>
-                        <h4>Playlist</h4>
+                    <div style={{marginBottom:'25px'}}>
+                        <div className="font-regular" style={{fontSize:'25px',margin:'20px',marginLeft:'5px'}}>Playlist</div>
                         <Grid container spacing={2}>
                        
                         {playlistarray.slice(0, 8).map((track) => (
-                        <AlbumSearch id={track.id} albumname={track.name} albumimage={track.images[0][0].url}/>
+                        <PlaylistSearch id={track.id} albumname={track.name} albumimage={track.images[0][0].url}/>
                         
                         ))}
                     </Grid>
@@ -123,7 +133,7 @@ const SearchPage = () => {
         {render && detailtrack()}
         {render && detailalbum()}
         {render && detailplaylist()}
-        {render && detailgenre()}
+       
     </div>
     
    )

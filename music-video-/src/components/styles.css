@@ -137,7 +137,7 @@ body {
 
 .boxc {
   flex-basis: calc(25% - 20px);
-  height: 200px;
+  height: 200px; 
   margin-right: 20px;
   padding: 10px;
   width: 200px;
@@ -315,4 +315,8 @@ button svg {
 }
 .css-10botns-MuiInputBase-input-MuiFilledInput-input{
   color: #e7e4e4 !important;
+}
+
+.css-6hp17o-MuiList-root-MuiMenu-list{
+  color: black !important;
 }

@@ -3,29 +3,37 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Track } from "./track";
 
-const Artistcard = (album) => {
-  const arr = album;
+const Artistcard = ({album}) => {
+  console.log(album)
+  /*
+
+  <Link to={'/video'} state={{id:video.videoId}} style={{textDecoration:'none',color:'#c6c2c2'}}>
+          <img src={video.thumbnails[1].url} alt='videoimage' style={{width:'300px'}}/>
+          <div className="video-title">{video.title}</div>
+          </Link>
+
+  */
 
   return (
-    <Link to={`/track/${arr.id}`} style={{ textDecoration: "none" }}>
-      <div className="boxc">
+
+    <Link to={`/video`} style={{ textDecoration: "none" }}>
+      <div className="boxc" style={{marginRight:'60px'}}>
         <div>
           <img
-            src={arr.link}
-            alt="album"
-            style={{ width: "100%", borderRadius: "50%", height: "193px" }}
-          />
+        src={album.thumbnails[1]?.url} alt='videoimage'
+        style={{ width: "250px", height: "193px" }}
+         />
+
+
           <div
             className="home-text-songcard"
             style={{
-              overflow: "hidden",
               width: "230px",
               height: "22px",
-              textAlign: "center",
               marginTop: "5%"
             }}
           >
-            {arr.name}
+            {album.title}
           </div>
         </div>
       </div>

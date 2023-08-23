@@ -1,12 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Songcard from "./songcard";
 import Artistcard from "./artistcard";
 import { albums, playlist, artist } from "./constants.js";
 import { Grid } from "@mui/material";
+import Playlisthomepage from "./playliststatic";
+import axios from "axios";
 
 const Searchfeed = () => {
+  const [render,setrender] =useState(true)
+  const [fetch,setfetch] =useState(false)
+  const [container,setContainer] =useState([])
+  
+
+  const trending=async()=>{
+    if(render){
+    try{
+      const response = await axios.get('http://localhost:5000/trend',{
+        params:{
+          country:'IN'
+        }
+      });
+      setContainer(response.data.data)
+      console.log(response.data.data)
+      setrender(false)
+      setfetch(true)
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  }
+  useEffect(()=>{
+    trending()
+
+  },[])
+  
   return (
-    <div className="home-text">
+    <div className="home-text" style={{marginBottom:'200px'}}>
       <span>Recently Played</span>
       <Grid style={{ 
           display: "flex",
@@ -42,35 +72,35 @@ const Searchfeed = () => {
           }}
         >
           {playlist.map((temp) => (
-            <Songcard
+            <Playlisthomepage
               key={temp.id}
               album={temp.name}
-              id={temp.album_id}
+              id={temp.playlist_id}
               link={temp.cover}
               name={temp.artist}
             />
           ))}
         </div>
       </div>
-      <div style={{ marginTop: "60px" }}>
-        <span>Artist</span>
+      <div style={{color:'white',marginBottom:'100px'}}>
+        <span>Artist</span> 
         <div
           style={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
             marginTop: "20px",
-            overflow: "auto"
+            overflow: "auto",
+            marginBottom:'100px'
           }}
         >
-          {artist.map((temp) => (
-            <Artistcard
-              key={temp.id}
-              id={temp.album_id}
-              link={temp.cover}
-              name={temp.name}
-            />
+          
+         
+            {fetch && container.slice(0,5).map((temp)=>(
+            <Artistcard album={temp} />
           ))}
+
+          
         </div>
       </div>
     </div>

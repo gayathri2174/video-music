@@ -4,7 +4,7 @@ import { details } from "./details";
 import Trackcard from "./trackcard";
 import axios from "axios";
 import {
-  Play,
+  Play, 
   Pause,
   ShareNetwork,
   UploadSimple,
@@ -12,7 +12,7 @@ import {
 } from "phosphor-react";
 import { Grid } from "@mui/material";
 
-const Track = ({ turl,playing }) => {
+const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
   const { id } = useParams();
   const [detail, setdetail] = useState([]);
   const [url, seturl] = useState("");
@@ -22,6 +22,7 @@ const Track = ({ turl,playing }) => {
   const [currentlyPlayingIndex, setCurrentlyPlayingIndex] = useState(-1); // Track index that is currently playing
   const [isplaying, setisplaying] = useState(false);
   const [audio, setAudioState] = useState("");
+
 
   const play = async (search, index) => {
     try {
@@ -46,6 +47,9 @@ const Track = ({ turl,playing }) => {
       }
       turl(audio);
       playing(isplaying);
+      imageurl(url)
+      albumfun(detail.name)
+      titlefun(search)
       console.log(isplaying)
   
       

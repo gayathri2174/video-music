@@ -2,11 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import { Play, Pause, FastForward, Rewind } from "phosphor-react";
 import { Grid } from "@mui/material";
 
-const Playsong = ({ audiourl, isplaying }) => {
+const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
   const [audio, setAudio] = useState(new Audio());
   const [duration, setDuration] = useState(0);
   const [currenttime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [imageurl,setimageurl] = useState('')
+  const [album,setalbum] = useState('')
+  const [title,settitle] =useState('')
   
   const progressbar = useRef();
   const animationref = useRef();
@@ -58,7 +61,7 @@ const Playsong = ({ audiourl, isplaying }) => {
 
     const newAudio = new Audio(audiourl);
     newAudio.addEventListener("loadedmetadata", () => {
-      setDuration(Math.floor(newAudio.duration));
+      setDuration(Math.floor(newAudio.duration)); 
       progressbar.current.max = Math.floor(newAudio.duration);
     });
     
@@ -89,6 +92,13 @@ const Playsong = ({ audiourl, isplaying }) => {
     setIsPlaying(isplaying)
   },[isplaying])
 
+  useEffect(()=>{
+    console.log("Props received:", albumname, titlename);
+    setimageurl(imgurl)
+    setalbum(albumname)
+    settitle(titlename)
+  },[imgurl,albumname,titlename])
+
   return (
     <Grid
       container
@@ -100,20 +110,26 @@ const Playsong = ({ audiourl, isplaying }) => {
         backgroundColor: "black",
       }}
       justifyContent={"center"}
-      spacing={5}
     >
       <Grid item>
-        <Rewind size={30} color="#f5f5f5" weight="fill" className="button-player" />
+        <img src={imageurl} alt="imagealbum" style={{height:'100px'}}/>
+      </Grid>
+      <Grid item>
+        <div className="font-regular">{title}</div>
+        <div className="font-light">{album}</div>
+      </Grid>
+      <Grid item>
+        <Rewind size={30} color="#f5f5f5" weight="fill" />
       </Grid>
       <Grid item>
         {isPlaying ? (
-          <Pause onClick={playPause} size={30} weight="fill" className="button-player" />
+          <Pause onClick={playPause} size={30} weight="fill" />
         ) : (
-          <Play onClick={playPause} size={30} weight="fill" className="button-player" />
+          <Play onClick={playPause} size={30} weight="fill" />
         )}
       </Grid>
       <Grid item>
-        <FastForward size={30} color="#f5f5f5" weight="fill" className="button-player" />
+        <FastForward size={30} color="#f5f5f5" weight="fill" />
       </Grid>
       <Grid item>{calculateTime(currenttime)}</Grid>
       <Grid item>
