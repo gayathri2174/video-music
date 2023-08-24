@@ -65,7 +65,7 @@ const Navbar = () => {
 
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
       <Box sx={{ display: 'flex', alignItems: 'flex-end',backgroundColor:"#3d3d3d",color:"white" ,borderRadius:'10px',height:'51px',paddingLeft:'10px'}}>
-        <MagnifyingGlass size={30} color="#f5f5f5" onClick={redirect} style={{marginBottom:'10px'}}/>
+        <MagnifyingGlass size={25} color="#f5f5f5" onClick={redirect} style={{marginBottom:'10px'}}/>
         <TextField id="filled-basic" label="Search" variant="filled" className="search-box"
         value={searchvalue} 
         onChange={(event) => setsearchvalue(event.target.value)}
