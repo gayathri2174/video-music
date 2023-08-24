@@ -40,19 +40,23 @@ const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
       if (currentlyPlayingIndex === index) {
         setCurrentlyPlayingIndex(-1); 
         setisplaying(false)// Pause the currently playing track
+        playing(false);
+        console.log('if',isplaying)
         
       } else {
         setCurrentlyPlayingIndex(index); // Play the clicked track
         setisplaying(true)
+        playing(true)
+        console.log('else')
         
         
       }
 
-      playing(isplaying);
+      
       imageurl(url)
       albumfun(detail.name)
       titlefun(search)
-      console.log(isplaying)
+      
   
       
     } catch (error) {

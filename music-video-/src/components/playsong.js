@@ -66,6 +66,7 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
       setDuration(Math.floor(newAudio.duration)); 
       progressbar.current.max = Math.floor(newAudio.duration);
     });
+    setAudio(newAudio);
     
     // Play the new audio if the component state indicates it should be playing
     if (isPlaying) {
@@ -73,7 +74,7 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
       animationref.current = requestAnimationFrame(whileplaying);
     }
 
-    setAudio(newAudio);
+    
     }
   }, [audiourl]);
 
@@ -92,6 +93,7 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
 
   useEffect(()=>{
     setIsPlaying(isplaying)
+    console.log(isPlaying)
   },[isplaying])
 
   useEffect(()=>{

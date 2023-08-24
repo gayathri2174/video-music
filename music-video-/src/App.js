@@ -14,7 +14,7 @@ const App=()=>{
   const [isPlaying,setIsPlaying] = useState(false)
   const playing=(isPlaying)=>{
     setIsPlaying(isPlaying) 
-    console.log(isPlaying)
+    console.log('app', isPlaying)
   }
   const turl=(url)=>{
     
@@ -39,9 +39,6 @@ const App=()=>{
    
   }
   
-  useEffect(()=>{
-
-  },[isPlaying,url])
    
   return(
   <BrowserRouter>
