@@ -26,15 +26,17 @@ const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
 
   const play = async (search, index) => {
     try {
+      const name = search+" "+detail.name;
       const response = await axios.get("http://localhost:5000/get-audio", {
         params: {
-          music: search,
+          music: name,
         },
       });
   
       const file = response.data;
       setAudioState(file.data.soundcloudTrack.audio[0].url);
-  
+      turl(file.data.soundcloudTrack.audio[0].url);
+   
       if (currentlyPlayingIndex === index) {
         setCurrentlyPlayingIndex(-1); 
         setisplaying(false)// Pause the currently playing track
@@ -45,7 +47,7 @@ const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
         
         
       }
-      turl(audio);
+
       playing(isplaying);
       imageurl(url)
       albumfun(detail.name)
@@ -121,7 +123,7 @@ const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
           >
             <div className="font-light" style={{marginRight:'6px'}}>
               {detail.artists?.map((artist, id) => {
-                return <div key={id}>{artist.name}</div>;
+                return <div key={id}>{artist.name} </div>;
               })}
             </div>
             <div className="dot" style={{marginRight:'6px'}}></div>

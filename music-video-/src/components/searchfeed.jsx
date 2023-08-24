@@ -91,7 +91,8 @@ const Searchfeed = () => {
             justifyContent: "space-between",
             marginTop: "20px",
             overflow: "auto",
-            marginBottom:'100px'
+            marginBottom:'100px',
+            height:'500px'
           }}
         >
           

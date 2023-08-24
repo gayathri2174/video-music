@@ -14,17 +14,7 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
   const progressbar = useRef();
   const animationref = useRef();
 
-  const playPause = () => {
-    if (isPlaying) {
-      audio.pause();
-      cancelAnimationFrame(animationref.current);
-    } else {
-      audio.play();
-      animationref.current = requestAnimationFrame(whileplaying);
-    }
-
-    setIsPlaying(!isPlaying);
-  };
+  
 
   const whileplaying = () => {
     progressbar.current.value = audio.currentTime;
@@ -51,6 +41,18 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
   const changerange = () => {
     audio.currentTime = progressbar.current.value;
     changeplayercurrenttime();
+  };
+
+  const playPause = () => {
+    if (isPlaying) {
+      audio.pause();
+      cancelAnimationFrame(animationref.current);
+    } else {
+      audio.play();
+      animationref.current = requestAnimationFrame(whileplaying);
+    }
+
+    setIsPlaying(!isPlaying);
   };
 
   useEffect(() => {
@@ -93,7 +95,6 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
   },[isplaying])
 
   useEffect(()=>{
-    console.log("Props received:", albumname, titlename);
     setimageurl(imgurl)
     setalbum(albumname)
     settitle(titlename)
@@ -115,10 +116,9 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
         <img src={imageurl} alt="imagealbum" style={{height:'100px'}}/>
       </Grid>
       <Grid item>
-        <div className="font-regular">{title}</div>
-      </Grid>
-      <Grid item>
-        <div className="font-light">{album}</div>
+        <div className="font-regular" style={{fontSize:'18px'}}>{title}</div>
+      
+        <div className="font-light" style={{fontSize:'14px'}}>{album}</div>
       </Grid>
       <Grid item>
         <Rewind size={30} color="#f5f5f5" weight="fill" />
