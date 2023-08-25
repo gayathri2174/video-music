@@ -112,41 +112,43 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
         height: "100px",
         backgroundColor: "black",
       }}
-      justifyContent={"center"}
+      direction="row"
+  justifyContent="flex-start"
+  alignItems="center"
     >
-      <Grid item>
-        <img src={imageurl} alt="imagealbum" style={{height:'100px'}}/>
+      <Grid item md={1} style={{margin:'5px',marginLeft:'20px',marginRight:'10px'}}>
+        <img src={imageurl} alt="imagealbum" style={{height:'100px',width:'100px'}}/>
       </Grid>
-      <Grid item>
-        <div className="font-regular" style={{fontSize:'18px'}}>{title}</div>
+      <Grid item md={2}>
+        <div className="font-regular" style={{fontSize:'20px'}}>{title}</div>
       
-        <div className="font-light" style={{fontSize:'14px'}}>{album}</div>
+        <div className="font-light" style={{fontSize:'17px'}}>{album}</div>
       </Grid>
-      <Grid item>
+      <Grid item md={1}>
         <Rewind size={30} color="#f5f5f5" weight="fill" />
       </Grid>
-      <Grid item>
+      <Grid item md={1}>
         {isPlaying ? (
           <Pause onClick={playPause} size={30} weight="fill" />
         ) : (
           <Play onClick={playPause} size={30} weight="fill" />
         )}
       </Grid>
-      <Grid item>
+      <Grid item md={1}>
         <FastForward size={30} color="#f5f5f5" weight="fill" />
       </Grid>
       <Grid item>{calculateTime(currenttime)}</Grid>
-      <Grid item>
+      <Grid item md={4}>
         <input
           type="range"
           className="progressbar"
           defaultValue="0"
           ref={progressbar}
           onChange={changerange}
-          style={{ width: "400px" }}
+          style={{ width: "-webkit-fill-available" }}
         />
       </Grid>
-      <Grid item>
+      <Grid item md={1}>
         <div>{duration && !isNaN(duration) && calculateTime(duration)}</div>
       </Grid>
     </Grid>

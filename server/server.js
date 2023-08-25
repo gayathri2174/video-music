@@ -4,9 +4,9 @@ const cors = require('cors'); // Import the cors package
 
 const app = express();
 const port = 5000;
-const key = 'd1559e80d8msh002a32a794784c8p17c2a6jsn176aede6db5a';
-const key1= '7a0133d17cmsh23f2af7fc4a3a07p14301bjsn09ad2443bfad';
-const key2='bafa5af131mshf8c9b7b68f4bf19p1f8eebjsn992b77484e26';
+const key = 'dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
+const key1= 'dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
+const key2='dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
 app.use(express.static('build'))
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000' })); // Allow requests from http://localhost:3000
