@@ -9,7 +9,6 @@ const key1= 'dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
 const key2='dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
 app.use(express.static('build'))
 app.use(express.json());
-var cors = require('cors');
 app.use(cors());
 
 app.get('/get-audio', async (req, res) => {
