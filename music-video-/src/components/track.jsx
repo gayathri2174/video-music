@@ -30,7 +30,7 @@ const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
       const response = await axios.get("http://localhost:5000/get-audio", {
         params: {
           music: name,
-        },
+        }, 
       });
   
       const file = response.data;

@@ -12,7 +12,7 @@ import {
   } from "phosphor-react";
   
 
-const Playlist=({turl,playing})=>{
+const Playlist=({turl,playing,imageurl,albumfun,titlefun})=>{
     const [fetch,setfetch] = useState(true);
     const location= useLocation();
     const {id,playlistimage,playlistname} =location.state
@@ -21,35 +21,43 @@ const Playlist=({turl,playing})=>{
     const [currentlyPlayingIndex, setCurrentlyPlayingIndex] = useState(-1); // Track index that is currently playing
     const [isplaying, setisplaying] = useState(false);
 
-    const play=async(search,index)=>{
-        try{
-          const response = await axios.get("http://localhost:5000/get-audio", {
-            params: {
-              music: search,
-            },
-          });
-      
-          const file = response.data;
-          setAudioState(file.data.soundcloudTrack.audio[0].url);
-      
-          if (currentlyPlayingIndex === index) {
-            setCurrentlyPlayingIndex(-1); 
-            setisplaying(false)// Pause the currently playing track
-            
-          } else {
-            setCurrentlyPlayingIndex(index); // Play the clicked track
-            setisplaying(true)
-            
-            
-          }
-          turl(audio);
-          playing(isplaying);
-          console.log(isplaying)
-   
-        }catch(error){
-         console.log(error)
-   
+    const play=async(track,album,image,index)=>{
+      try {
+        const response = await axios.get("http://localhost:5000/get-audio", {
+          params: {
+            music: track,
+          }, 
+        });
+    
+        const file = response.data;
+        setAudioState(file.data.soundcloudTrack.audio[0].url);
+        turl(file.data.soundcloudTrack.audio[0].url);
+     
+        if (currentlyPlayingIndex === index) {
+          setCurrentlyPlayingIndex(-1); 
+          setisplaying(false)// Pause the currently playing track
+          playing(false);
+          console.log('if',isplaying)
+          
+        } else {
+          setCurrentlyPlayingIndex(index); // Play the clicked track
+          setisplaying(true)
+          playing(true)
+          console.log('else')
+          
+          
         }
+  
+        
+        imageurl(image)
+        albumfun(album)
+        titlefun(track)
+        
+    
+        
+      } catch (error) {
+        console.log(error);
+      }
        }
        
     const gettrack=async()=>{
@@ -80,7 +88,7 @@ const Playlist=({turl,playing})=>{
            <Grid item> <img src={playlistimage} alt='playlistimage' /></Grid>
            <Grid item className="font-medium" style={{fontSize:'40px',marginBottom:'30px'}}>{playlistname}</Grid>
             </Grid>
-            <div style={{marginTop:'10px'}}>
+            <div style={{marginTop:'20px'}}>
                 {container.map((track,id)=>(
                     <Grid container key={id} justifyContent='flex-start' style={{marginBottom:'5px'}}>
                       <Grid item md={1}>
@@ -102,7 +110,7 @@ const Playlist=({turl,playing})=>{
         color="#fafafa"
         weight="fill"
         style={{ flexBasis: "10%" }}
-        onClick={() => play(track.name, id)}
+        onClick={() => play(track.name, track.album.name,track.album.cover[1].url, id)}
       />
     ) : (
       <Play
@@ -110,7 +118,7 @@ const Playlist=({turl,playing})=>{
         color="#fafafa"
         weight="fill"
         style={{ flexBasis: "10%" }}
-        onClick={() => play(track.name, id)}
+        onClick={() => play(track.name, track.album.name,track.album.cover[1].url, id)}
       />
     )}
                         </Grid>

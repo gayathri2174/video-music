@@ -5,7 +5,7 @@ import { Gif,Pause, Play ,CaretDown} from "phosphor-react";
 import axios from "axios"; 
 import './styles.css'
 
-const PlayTrack=({turl,playing})=>{
+const PlayTrack=({turl,playing,imageurl,albumfun,titlefun })=>{
     const location = useLocation();
   const {id, trackname, albumimage, albumname } = location.state;
   const [audio, setAudioState] = useState('');
@@ -38,17 +38,22 @@ const PlayTrack=({turl,playing})=>{
 }
   const play = async (value) => {
     try {
+      const search = trackname + ' '+ albumname
+      
       const response = await axios.get('http://localhost:5000/get-audio', {
         params: {
-          music: trackname
+          music: search
         }
       });
 
       const file = response.data;
       setAudioState(file.data.soundcloudTrack.audio[0].url);
-      turl(audio);
+      turl(file.data.soundcloudTrack.audio[0].url);
       setisplaying(value)
-      playing(isplaying);
+      playing(value);
+      imageurl(albumimage)
+      albumfun(albumname)
+      titlefun(trackname)
     } catch (error) {
       console.log(error);
     }
@@ -58,7 +63,7 @@ const PlayTrack=({turl,playing})=>{
     try {
       const response = await axios.get('http://localhost:5000/search-video', {
         params: {
-          search: trackname
+          search: trackname + ' '+albumname
         }
       });
 
@@ -79,7 +84,7 @@ const PlayTrack=({turl,playing})=>{
           params: {
             id: videoId
           }
-        });
+        }); 
 
         const file = response.data;
         if (file.data.videos.items.length > 0) {
@@ -101,6 +106,10 @@ const PlayTrack=({turl,playing})=>{
  useEffect(() => {
     getVideo();
   }, [videoId]);
+
+  const dummy=()=>{
+    playing(false)
+  }
 
     return(
         <div style={{color:'white'}}>
@@ -135,7 +144,7 @@ const PlayTrack=({turl,playing})=>{
                 <CaretDown size={20} color="#f5f5f5" weight="thin" style={{marginLeft:'10px',marginBottom:'-5px'}}/>
                 </div> 
                 {!rendervideo &&(
-                  <video controls autoplay name='media' poster={posterurl} style={{width:'-webkit-fill-available',height:'-webkit-fill-available'}}>
+                  <video controls autoplay name='media' poster={posterurl} style={{width:'-webkit-fill-available',height:'-webkit-fill-available'}} onPlay={dummy}>
                   <source src={videourl} type='video/mp4'/>
               </video>
 

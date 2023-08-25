@@ -37,7 +37,7 @@ const Searchfeed = () => {
   
   return (
     <div className="home-text" style={{marginBottom:'200px'}}>
-      <span>Recently Played</span>
+      <span>Album</span>
       <Grid style={{ 
           display: "flex",
           flexDirection: "row", 
