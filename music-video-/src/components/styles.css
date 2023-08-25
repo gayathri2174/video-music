@@ -21,7 +21,7 @@ body {
 .sidebar {
   height: 100vh;
   width: 220px;
-  background-color: black;
+  background-color: white;
   border-right: 1px solid #3d3d3d;
   position: static; 
   display: flex;
