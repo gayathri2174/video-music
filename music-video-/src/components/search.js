@@ -33,7 +33,7 @@ const SearchPage = () => {
       }
       useEffect(()=>{
         Search()
-      },[])
+      },[searchvalue])
       const detailalbum=()=>{
         const len = searchres.albums.items.length;
         console.log('album',len)

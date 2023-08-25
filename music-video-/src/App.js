@@ -61,11 +61,11 @@ const App=()=>{
           <Route path="/" exact element={<Searchfeed />} />
           <Route path="/discover" element={<Videofeed />} />
           <Route path="/track/:id" element={<Track turl={turl} playing={playing} imageurl={imageurl} albumfun={albumfun} titlefun={titlefun}/>} />
-          <Route path="/playtrack" element={<PlayTrack turl={turl} playing={playing}/>} />
+          <Route path="/playtrack" element={<PlayTrack turl={turl} playing={playing} imageurl={imageurl} albumfun={albumfun} titlefun={titlefun}/>} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/video" element={<PlayVideo />} />
           <Route path="/trending" element={<Genre/>} />
-          <Route path="/playlist" element={<Playlist turl={turl} playing={playing}/>} />
+          <Route path="/playlist" element={<Playlist turl={turl} playing={playing} imageurl={imageurl} albumfun={albumfun} titlefun={titlefun}/>} />
         </Routes>
       </Box>
     </Stack>

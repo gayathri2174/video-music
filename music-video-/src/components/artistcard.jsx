@@ -17,18 +17,18 @@ const Artistcard = ({album}) => {
   return (
 
     <Link to={`/video`} style={{ textDecoration: "none" }}>
-      <div className="boxc" style={{marginRight:'90px'}}>
+      <div className="boxc" style={{marginRight:'130px'}}>
         <div>
           <img
         src={album.thumbnails[1]?.url} alt='videoimage'
-        style={{ width: "280px", height: "193px" }}
+        style={{ width: "320px", height: "193px" }}
          />
 
 
           <div
             className="home-text-songcard"
             style={{
-              width: "230px",
+              width: "320px",
               height: "22px",
               marginTop: "5%"
             }}

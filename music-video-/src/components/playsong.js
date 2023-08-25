@@ -56,7 +56,9 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
   };
 
   useEffect(() => {
+    setIsPlaying(isplaying)
     if (audiourl) {
+      console.log('use1 ',audiourl)
       
      audio.pause();
     cancelAnimationFrame(animationref.current);
@@ -67,20 +69,24 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
       progressbar.current.max = Math.floor(newAudio.duration);
     });
     setAudio(newAudio);
+    console.log('use1',isPlaying)
     
     // Play the new audio if the component state indicates it should be playing
-    if (isPlaying) {
-      newAudio.play();
+    /*if (isPlaying) {
+      console.log('use1 ',isPlaying)
+      audio.play();
       animationref.current = requestAnimationFrame(whileplaying);
-    }
+    }*/
 
     
     }
-  }, [audiourl]);
+  }, [audiourl,isplaying]);
 
   useEffect(() => {
     if (isPlaying) {
+      console.log('use2 ',isPlaying)
       if (audio.paused) {
+        console.log('use2 paused')
         audio.play();
         animationref.current = requestAnimationFrame(whileplaying);
       }
@@ -91,10 +97,10 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
   }, [isPlaying, audio]);
   
 
-  useEffect(()=>{
+ /* useEffect(()=>{
     setIsPlaying(isplaying)
-    console.log(isPlaying)
-  },[isplaying])
+    console.log('use3',isPlaying)
+  },[isplaying])*/
 
   useEffect(()=>{
     setimageurl(imgurl)
@@ -117,28 +123,32 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
   alignItems="center"
     >
       <Grid item md={1} style={{margin:'5px',marginLeft:'20px',marginRight:'10px'}}>
-        <img src={imageurl} alt="imagealbum" style={{height:'100px',width:'100px'}}/>
+        <img src={imageurl} alt="imagealbum" style={{height:'100px',width:'100px',borderRadius:'2px'}}/>
       </Grid>
-      <Grid item md={2}>
-        <div className="font-regular" style={{fontSize:'20px'}}>{title}</div>
+      <Grid item md={4} style={{marginTop:'-7px'}}>
+        <div className="font-regular truncate-text" style={{fontSize:'20px'}}>{title}</div>
       
-        <div className="font-light" style={{fontSize:'17px'}}>{album}</div>
+        <div className="font-light truncate-text" style={{fontSize:'17px'}}>{album}</div>
       </Grid>
       <Grid item md={1}>
-        <Rewind size={30} color="#f5f5f5" weight="fill" />
+        <Grid container spacing={1}>
+          <Grid item>
+        <Rewind size={27} color="#f5f5f5" weight="fill" />
       </Grid>
-      <Grid item md={1}>
+      <Grid item>
         {isPlaying ? (
           <Pause onClick={playPause} size={30} weight="fill" />
         ) : (
           <Play onClick={playPause} size={30} weight="fill" />
         )}
       </Grid>
-      <Grid item md={1}>
-        <FastForward size={30} color="#f5f5f5" weight="fill" />
+      <Grid item>
+        <FastForward size={27} color="#f5f5f5" weight="fill" />
       </Grid>
-      <Grid item>{calculateTime(currenttime)}</Grid>
-      <Grid item md={4}>
+      </Grid>
+      </Grid>
+      <Grid item md={1} style={{textAlign:'center'}}>{calculateTime(currenttime)}</Grid>
+      <Grid item md={3}>
         <input
           type="range"
           className="progressbar"
@@ -149,7 +159,7 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
         />
       </Grid>
       <Grid item md={1}>
-        <div>{duration && !isNaN(duration) && calculateTime(duration)}</div>
+        <div style={{textAlign:'center'}}>{duration && !isNaN(duration) && calculateTime(duration)}</div>
       </Grid>
     </Grid>
   );

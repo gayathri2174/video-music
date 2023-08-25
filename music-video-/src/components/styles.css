@@ -320,3 +320,9 @@ button svg {
 .css-6hp17o-MuiList-root-MuiMenu-list{
   color: black !important;
 }
+
+.truncate-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
