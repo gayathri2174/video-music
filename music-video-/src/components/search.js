@@ -7,6 +7,8 @@ import AlbumSearch from "./AlbumSearch";
 import Grid from '@mui/material/Grid';
 import TrackDetail from "./TrackDetail";
 import PlaylistSearch from "./PlaylistSearch";
+import LoadingSpinner from "./Loading";
+
 
 const SearchPage = () => {
     const navigate=useNavigate();
@@ -14,21 +16,29 @@ const SearchPage = () => {
     const searchvalue= location.state.value;
     const [searchres,setsearchres] = useState('');
     const [render,setrender] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error,setError] = useState('')
     const Search=async()=>{
         try{
+            setIsLoading(true)
           const response = await axios.get('http://localhost:5000/search',{
             params:{
               search: searchvalue
             }
           })
-         const file= response.data;
+         
+         setTimeout(() => {
+            const file= response.data;
          console.log(file.data)
          setsearchres(file.data) 
          setrender(true)
-
+            setIsLoading(false)
+          }, 3000);
          
         }catch(error){
           console.log(error)
+          setError('Unable to fetch')
+          setIsLoading(false)
         }
       }
       useEffect(()=>{
@@ -126,8 +136,7 @@ const SearchPage = () => {
             
         }
       
-
-   return(
+   const content=(
     <div style={{color:"white"}}>
         
         {render && detailtrack()}
@@ -135,6 +144,13 @@ const SearchPage = () => {
         {render && detailplaylist()}
        
     </div>
+   )
+   return(
+    <div>
+        {isLoading ? <LoadingSpinner /> : content}
+        {error && <div style={{color:'white'}} className="error">{error}</div>}
+    </div>
+    
     
    )
   

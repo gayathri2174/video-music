@@ -2,11 +2,10 @@ import { IconButton, Stack, AppBar, Toolbar, Button,Box } from "@mui/material";
 import { Link,useNavigate } from "react-router-dom";
 import Logo from "./icons/logo.png";
 import React, { useState } from "react";
-import { MoonStars, User, CaretLeft, CaretRight,MagnifyingGlass } from "phosphor-react";
+import { MoonStars, User, CaretLeft, CaretRight,MagnifyingGlass,List } from "phosphor-react";
 import "./styles.css";
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
-
 
 
  
@@ -45,15 +44,16 @@ const Navbar = () => {
         justifyContent: "space-between"
       }}
     >
+      <List size={30} color="#f5f5f5" weight="fill" style={{marginLeft:'5px'}}/>
       <Link to="/" style={{ display: "flex", alignItems: "center" }}>
-        <img src={Logo} alt="logo" style={{ height: "75px" }} />
+        <img src={Logo} alt="logo" style={{ height: "107px" }} />
       </Link>
       <Stack direction="row" ml="10vh">
         <IconButton type="submit" sx={{ color: "white" }}>
-          <CaretLeft className="caret" />
+          <CaretLeft />
         </IconButton>
         <IconButton type="submit" sx={{ color: "white" }}>
-          <CaretRight className="caret" />
+          <CaretRight  />
         </IconButton>
       </Stack>
     </Stack>

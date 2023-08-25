@@ -5,27 +5,38 @@ import { albums, playlist, artist } from "./constants.js";
 import { Grid } from "@mui/material";
 import Playlisthomepage from "./playliststatic";
 import axios from "axios";
+import LoadingSpinner from "./Loading";
 
 const Searchfeed = () => {
   const [render,setrender] =useState(true)
   const [fetch,setfetch] =useState(false)
   const [container,setContainer] =useState([])
+  const [isLoading, setIsLoading] = useState(true);
+    const [error,setError] = useState('')
   
 
   const trending=async()=>{
     if(render){
     try{
+      setIsLoading(true)
       const response = await axios.get('http://localhost:5000/trend',{
         params:{
           country:'IN'
         }
       });
-      setContainer(response.data.data)
+      
+      setTimeout(() => {
+        setContainer(response.data.data)
       console.log(response.data.data)
       setrender(false)
       setfetch(true)
+        
+        setIsLoading(false)
+      }, 3000);
     }catch(error){
       console.log(error)
+          setError('Unable to fetch')
+          setIsLoading(false)
     }
   }
 
@@ -34,8 +45,8 @@ const Searchfeed = () => {
     trending()
 
   },[])
-  
-  return (
+
+  const content =(
     <div className="home-text" style={{marginBottom:'200px'}}>
       <span>Album</span>
       <Grid style={{ 
@@ -104,6 +115,13 @@ const Searchfeed = () => {
           
         </div>
       </div>
+    </div>
+  )
+  
+  return (
+    <div>
+        {isLoading ? <LoadingSpinner /> : content}
+        {error && <div style={{color:'white'}} className="error">{error}</div>}
     </div>
   );
 };
