@@ -72,7 +72,7 @@ const Searchfeed = () => {
        
       </Grid>
       <div>
-        <span>Playlist for you</span>
+        <span>Playlist</span>
         <div
           style={{
             display: "flex",
