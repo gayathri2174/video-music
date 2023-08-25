@@ -23,7 +23,7 @@ body {
   width: 220px;
   background-color: black;
   border-right: 1px solid #3d3d3d;
-  position: static;
+  position: static; 
   display: flex;
   flex: 20%;
   align-items: left;

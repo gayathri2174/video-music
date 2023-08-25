@@ -120,7 +120,7 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
         bottom: "0",
         color: "white",
         height: "100px",
-        backgroundColor: "black",
+        backgroundColor: "#3d3d3d",
       }}
       direction="row"
   justifyContent="flex-start"

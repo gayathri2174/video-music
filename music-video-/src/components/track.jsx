@@ -11,7 +11,7 @@ import {
   DotsThreeVertical,
 } from "phosphor-react";
 import { Grid } from "@mui/material";
-
+ 
 const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
   const { id } = useParams();
   const [detail, setdetail] = useState([]);
@@ -68,7 +68,7 @@ const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
   const Albummeta = async () => {
     if (fetch) {
       try {
-        const response = await axios.get("http://localhost:5000/album-metadata", {
+        const response = await axios.get("/album-metadata", {
           params: {
             ids: id,
           },
@@ -86,7 +86,7 @@ const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
   const fetchAPI = async () => {
     if (isLoading) {
       try {
-        const response = await axios.get("http://localhost:5000/get-tracks", {
+        const response = await axios.get("/get-tracks", {
           params: {
             ids: id,
           },
