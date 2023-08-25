@@ -29,7 +29,7 @@ body {
   align-items: left;
   justify-content: left;
   text-align: left;
-  margin-left: 4%;
+  margin-left: 2%;
 }
 @media only screen and (max-width: 750px) {
   .search-bar {

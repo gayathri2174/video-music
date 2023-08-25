@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const SideBar = ({ selectedCategory, setSelectedCategory }) => (
   <Stack
     direction="column"
-    spacing={0}
+    spacing={0} 
     sx={{
       overflowY: "auto",
       height: "100vh",
