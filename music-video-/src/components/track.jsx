@@ -27,7 +27,7 @@ const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
   const play = async (search, index) => {
     try {
       const name = search+" "+detail.name;
-      const response = await axios.get("https://b-music.onrender.com/get-audio", {
+      const response = await axios.get("/get-audio", {
         params: {
           music: name,
         }, 
@@ -68,7 +68,7 @@ const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
   const Albummeta = async () => {
     if (fetch) {
       try {
-        const response = await axios.get("https://b-music.onrender.com/album-metadata", {
+        const response = await axios.get("/album-metadata", {
           params: {
             ids: id,
           },
@@ -86,7 +86,7 @@ const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
   const fetchAPI = async () => {
     if (isLoading) {
       try {
-        const response = await axios.get("https://b-music.onrender.com/get-tracks", {
+        const response = await axios.get("/get-tracks", {
           params: {
             ids: id,
           },
