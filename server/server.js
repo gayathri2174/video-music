@@ -7,9 +7,8 @@ const port = 5000;
 const key = 'dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
 const key1= 'dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
 const key2='dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
-app.use(express.static('build'))
 app.use(express.json());
-app.use(cors());
+app.use(express.static('build'))
 
 app.get('/get-audio', async (req, res) => {
   const search = req.query.music;
