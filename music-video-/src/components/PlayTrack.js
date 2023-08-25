@@ -80,7 +80,7 @@ const PlayTrack=({turl,playing,imageurl,albumfun,titlefun })=>{
   const getVideo = async () => {
     if (videoId && rendervideo) {
       try {
-        const response = await axios.get('http://localhost:5000/get-video', {
+        const response = await axios.get('https://b-music.onrender.com/get-video', {
           params: {
             id: videoId
           }

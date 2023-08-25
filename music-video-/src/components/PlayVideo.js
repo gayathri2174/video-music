@@ -14,7 +14,7 @@ const PlayVideo=()=>{
     const getVideo = async () => {
         if (render) {
           try {
-            const response = await axios.get('http://localhost:5000/get-video', {
+            const response = await axios.get('https://b-music.onrender.com/get-video', {
               params: {
                 id: id
               }
