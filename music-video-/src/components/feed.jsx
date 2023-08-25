@@ -6,7 +6,7 @@ import Searchfeed from "./searchfeed";
 const Feed = ({display}) => {
   const [selectedCategory, setSelectedCategory] = useState("Home");
   return (
-    <Box className="sidebar" sx={{display: display ? 'block' : 'none'}}>
+    <Box className="sidebar" sx={{display: display ? 'block' : 'block'}}>
       <SideBar
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
