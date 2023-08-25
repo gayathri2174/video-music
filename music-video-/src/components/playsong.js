@@ -68,6 +68,9 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
       setDuration(Math.floor(newAudio.duration)); 
       progressbar.current.max = Math.floor(newAudio.duration);
     });
+    newAudio.addEventListener("ended", () => {
+      setIsPlaying(false); // Set isPlaying to false when audio ends
+    });
     setAudio(newAudio);
     console.log('use1',isPlaying)
     

@@ -7,9 +7,12 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import './styles.css'
+import './styles.css';
+import LoadingSpinner from "./Loading";
+
 const Videofeed = () => {
   const [containers,setContainer] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
   const [render,setrender]=useState(true)
   const [fetch,setfetch]=useState(false)
   const [countrys, setcountry] = useState('US');
@@ -21,16 +24,20 @@ const Videofeed = () => {
   const trending=async()=>{
     if(render){
     try{
+      setIsLoading(true)
       const response = await axios.get('http://localhost:5000/trend',{
         params:{
           country:countrys
         }
       });
+      setIsLoading(false)
       setContainer(response.data.data)
       setrender(false)
       setfetch(true)
+      dispatch(hideLoading())
     }catch(error){
       console.log(error)
+      setIsLoading(false)
     }
   }
 
@@ -38,7 +45,8 @@ const Videofeed = () => {
   useEffect(()=>{
     trending();
   },[render,countrys])
-  return(
+
+  const Trending= (
     <div style={{color:"white"}}>
       <Grid container justifyContent={'space-between'}>
         <Grid item><h3>Trending</h3></Grid>
@@ -71,6 +79,12 @@ const Videofeed = () => {
         </Grid>
        )}
 
+    </div>
+
+  )
+  return(
+    <div>
+      {isLoading ? <LoadingSpinner /> : Trending}
     </div>
   );
 };
