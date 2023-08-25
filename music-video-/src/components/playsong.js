@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Play, Pause, FastForward, Rewind } from "phosphor-react";
 import { Grid } from "@mui/material";
+import Logo from './icons/b.png'
 
 const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
   const [audio, setAudio] = useState(new Audio());
@@ -126,7 +127,7 @@ const Playsong = ({ audiourl, isplaying,imgurl,albumname,titlename }) => {
   alignItems="center"
     >
       <Grid item md={1} style={{margin:'5px',marginLeft:'20px',marginRight:'10px'}}>
-        <img src={imageurl} alt="imagealbum" style={{height:'100px',width:'100px',borderRadius:'2px'}}/>
+        <img src={Logo} alt="imagealbum" style={{height:'100px',width:'100px',borderRadius:'2px'}}/>
       </Grid>
       <Grid item md={4} style={{marginTop:'-7px'}}>
         <div className="font-regular truncate-text" style={{fontSize:'20px'}}>{title}</div>

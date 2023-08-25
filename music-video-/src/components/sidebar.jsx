@@ -4,7 +4,7 @@ import "./styles.css";
 import { House, Sparkle, Shuffle, ChartBar } from "phosphor-react";
 import { Link } from "react-router-dom";
 
-const SideBar = ({ selectedCategory, setSelectedCategory }) => (
+const SideBar = ({ selectedCategory, setSelectedCategory,display }) => (
   <Stack
     direction="column"
     spacing={0} 
@@ -12,7 +12,8 @@ const SideBar = ({ selectedCategory, setSelectedCategory }) => (
       overflowY: "auto",
       height: "100vh",
       flexDirection: { md: "column" },
-      marginBlockStart: "10px"
+      marginBlockStart: "10px",
+      display: display ? 'block':'none'
     }}
   >
     <Link to="/" style={{ textDecoration: "none" }}>

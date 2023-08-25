@@ -9,11 +9,17 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
  
-const Navbar = () => {
+const Navbar = ({toggle}) => {
   const [searchvalue,setsearchvalue]=useState('');
   const [searchres,setsearchres] = useState('');
   const [render,setrender] = useState(true);
   const navigate=useNavigate();
+  const [display,setdisplay]=useState(false)
+
+  const handleclick=()=>{
+    toggle(!display)
+    setdisplay(!display)
+  }
 
   const redirect=()=>{
     navigate("/search",{
@@ -44,7 +50,7 @@ const Navbar = () => {
         justifyContent: "space-between"
       }}
     >
-      <List size={30} color="#f5f5f5" weight="fill" style={{marginLeft:'5px'}}/>
+      <List size={30} color="#f5f5f5" weight="fill" style={{marginLeft:'5px',cursor:'pointer'}} onClick={handleclick}/>
       <Link to="/" style={{ display: "flex", alignItems: "center" }}>
         <img src={Logo} alt="logo" style={{ height: "107px" }} />
       </Link>
@@ -65,7 +71,7 @@ const Navbar = () => {
 
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
       <Box sx={{ display: 'flex', alignItems: 'flex-end',backgroundColor:"#3d3d3d",color:"white" ,borderRadius:'10px',height:'51px',paddingLeft:'10px'}}>
-        <MagnifyingGlass size={25} color="#f5f5f5" onClick={redirect} style={{marginBottom:'10px'}}/>
+        <MagnifyingGlass size={25} color="#f5f5f5" onClick={redirect} style={{marginBottom:'10px',marginRight:'10px',cursor:'pointer'}}/>
         <TextField id="filled-basic" label="Search" variant="filled" className="search-box"
         value={searchvalue} 
         onChange={(event) => setsearchvalue(event.target.value)}

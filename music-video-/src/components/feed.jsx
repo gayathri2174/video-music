@@ -3,13 +3,14 @@ import { Box, Stack, Typography } from "@mui/material";
 import SideBar from "./sidebar";
 import Searchfeed from "./searchfeed";
 
-const Feed = () => {
+const Feed = ({display}) => {
   const [selectedCategory, setSelectedCategory] = useState("Home");
   return (
-    <Box className="sidebar">
+    <Box className="sidebar" sx={{display: display ? 'block' : 'none'}}>
       <SideBar
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+        display={display}
       />
     </Box> 
   );
