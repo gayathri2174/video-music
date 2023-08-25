@@ -4,7 +4,6 @@
     "description": "",
     "keywords": [],
     "main": "src/index.js",
-    "proxy": "https://b-music.onrender.com",
     "dependencies": {
         "@emotion/react": "11.10.5",
         "@emotion/styled": "11.10.5",
