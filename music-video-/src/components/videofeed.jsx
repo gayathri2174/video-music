@@ -12,11 +12,11 @@ import LoadingSpinner from "./Loading";
 
 const Videofeed = () => {
   const [containers,setContainer] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [render,setrender]=useState(true)
   const [fetch,setfetch]=useState(false)
   const [countrys, setcountry] = useState('US');
-
+  const [error,setError] = useState('')
   const handleChange = async (event) => {
     setcountry(event.target.value);
     setrender(true)
@@ -30,13 +30,16 @@ const Videofeed = () => {
           country:countrys
         }
       });
-      setIsLoading(false)
-      setContainer(response.data.data)
-      setrender(false)
-      setfetch(true)
-      dispatch(hideLoading())
+       setTimeout(() => {
+        setContainer(response.data.data)
+        setrender(false)
+        setfetch(true)
+        setIsLoading(false)
+      }, 3000);
+      
     }catch(error){
       console.log(error)
+      setError('Unable to fetch')
       setIsLoading(false)
     }
   }
@@ -85,6 +88,7 @@ const Videofeed = () => {
   return(
     <div>
       {isLoading ? <LoadingSpinner /> : Trending}
+      {error && <div style={{color:'white'}} className="error">{error}</div>}
     </div>
   );
 };
