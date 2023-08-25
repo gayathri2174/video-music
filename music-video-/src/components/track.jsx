@@ -68,7 +68,7 @@ const Track = ({ turl,playing,imageurl,albumfun,titlefun }) => {
   const Albummeta = async () => {
     if (fetch) {
       try {
-        const response = await axios.get("https://b-music.onrender.com/album-metadata", {
+        const response = await axios.get("http://localhost:5000/album-metadata", {
           params: {
             ids: id,
           },
