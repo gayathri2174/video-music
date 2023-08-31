@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path')
 const axios = require('axios');
 const cors = require('cors'); // Import the cors package
 
@@ -8,7 +9,7 @@ const key = 'dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
 const key1= 'dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
 const key2='dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
 app.use(express.json());
-app.use(express.static('build'))
+app.use(express.static(path.join(__dirname + "/public")))
 
 app.get('/get-audio', async (req, res) => {
   const search = req.query.music;
