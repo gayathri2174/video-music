@@ -8,9 +8,9 @@
     "npm": "7.4.3"
   },
   "scripts": {
-    "server": "nodemon index.js",
+    "server": "nodemon server.js",
     "build": "npm i",
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
