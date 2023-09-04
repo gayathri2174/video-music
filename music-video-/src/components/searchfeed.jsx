@@ -19,7 +19,7 @@ const Searchfeed = () => {
     if(render){
     try{
       setIsLoading(true)
-      const response = await axios.get('https://b-music.onrender.com/trend',{
+      const response = await axios.get('http://localhost:5000/trend',{
         params:{
           country:'IN'
         }

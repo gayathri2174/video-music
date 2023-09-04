@@ -5,11 +5,11 @@ const cors = require('cors'); // Import the cors package
 
 const app = express();
 const port = 5000;
-const key = 'dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
+const key = '0b6486c8camshe8d11e1414eb3d9p1079e9jsne6a5c21c8e6d';
 const key1= 'dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
 const key2='dd1bff40admshdbc159e88f58ef8p1a064bjsn0b2d2bccaa72';
 app.use(express.json());
-app.use(express.static(path.join(__dirname + "/public")))
+//app.use(express.static(path.join(__dirname + "/public")))
 
 app.get('/get-audio', async (req, res) => {
   const search = req.query.music;
